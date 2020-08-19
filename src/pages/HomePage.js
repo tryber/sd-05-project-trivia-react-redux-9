@@ -55,7 +55,7 @@ class HomePage extends Component {
   }
 
   // função que é chamada ao clicar o botão "jogar"
-  clickPlayButton() {
+  clickPlayButton(email, name) {
     const { data } = this.props;
     this.props.setLogin(email, name);
     this.props.thunkRequest();
@@ -76,7 +76,7 @@ class HomePage extends Component {
             <button
               data-testid="btn-play"
               disabled={this.checkLogin()}
-              onClick={() => this.clickPlayButton()}
+              onClick={() => this.clickPlayButton(email, name)}
             >
               Jogar
             </button>
@@ -101,7 +101,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   setLogin: (email, name) => dispatch(setStatus(email, name)),
-  thunkRequest: () => dispatch(thunkRequest());
+  thunkRequest: () => dispatch(thunkRequest()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
