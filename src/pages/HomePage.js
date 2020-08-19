@@ -16,11 +16,6 @@ class HomePage extends Component {
     this.getName = this.getName.bind(this);
   }
 
-  checkLogin() {
-    if (!this.state.email || !this.state.name) return true;
-    return false;
-  }
-
   getEmail() {
     const { email } = this.state;
     return (
@@ -49,6 +44,11 @@ class HomePage extends Component {
         />
       </label>
     );
+  }
+
+  checkLogin() {
+    if (!this.state.email || !this.state.name) return true;
+    return false;
   }
 
   render() {
