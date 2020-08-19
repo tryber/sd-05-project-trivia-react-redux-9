@@ -1,16 +1,24 @@
-import React from 'react';
-import logo from './trivia.png';
-import './App.css';
+import React, { Component } from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import GamePage from './pages/GamePage';
+import SettingsPage from './pages/SettingsPage';
+import RankingPage from './pages/RankingPage';
 
-export default function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          SUA VEZ
-        </p>
-      </header>
-    </div>
-  );
+// import logo from './trivia.png';
+
+class App extends Component {
+  render() {
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/game" component={GamePage} />
+          <Route path="/settings" component={SettingsPage} />
+          <Route path="/ranking" component={RankingPage} />
+        </Switch>
+      </BrowserRouter>
+    );
+  }
 }
+export default App;

@@ -5,14 +5,14 @@ class Header extends Component {
     return (
       <div>
         <header>
-          <div data-testid="header-profile-pic">
+          <div data-testid="header-profile-picture">
             <img
               src="https://static.thenounproject.com/png/363633-200.png"
               alt="Player's Name"
             />
           </div>
-          <div className="player-name">Jogador: Eduardo</div>
-          <div className="player-score">Pontos: 20</div>
+          <div data-testid="header-player-name">Jogador: Eduardo</div>
+          <div data-testid="header-player-score">Pontos: 20</div>
         </header>
       </div>
     );
