@@ -12,11 +12,43 @@ class HomePage extends Component {
       email: '',
     };
     this.checkLogin = this.checkLogin.bind(this);
+    this.getEmail = this.getEmail.bind(this);
+    this.getName = this.getName.bind(this);
   }
 
   checkLogin() {
     if (!this.state.email || !this.state.name) return true;
     return false;
+  }
+
+  getEmail() {
+    const { email } = this.state;
+    return (
+      <label htmlFor="email-input">
+        Email:
+        <input
+          data-testid="input-gravatar-email"
+          value={email}
+          placeholder="Digite seu e-mail"
+          onChange={(e) => this.setState({ email: e.target.value })}
+        />
+      </label>
+    );
+  }
+
+  getName() {
+    const { name } = this.state;
+    return (
+      <label htmlFor="name-input">
+        Name:
+        <input
+          data-testid="input-player-name"
+          value={name}
+          placeholder="Digite seu nome"
+          onChange={(e) => this.setState({ name: e.target.value })}
+        />
+      </label>
+    );
   }
 
   render() {
@@ -25,26 +57,17 @@ class HomePage extends Component {
     return (
       <div>
         <form>
-          <label htmlFor="email-input"> Email:
-            <input
-              data-testid="input-gravatar-email"
-              value={email} placeholder="Digite seu e-mail"
-              onChange={(e) => this.setState({ email: e.target.value })}
-	     />
-          </label> <br />
-          <label htmlFor="name-input"> Name:
-            <input
-              data-testid="input-player-name"
-              value={name} placeholder="Digite seu nome"
-              onChange={(e) => this.setState({ name: e.target.value })}
-	    />
-          </label> <br />
+          {this.getEmail()}
+          <br />
+          {this.getName()}
+          <br />
           <Link to="/game">
             <button
               data-testid="btn-play"
               disabled={this.checkLogin()}
               onClick={() => setLogin(email, name)}
-	    > Jogar
+            >
+              Jogar
             </button>
           </Link>
           <Link to="/settings">
