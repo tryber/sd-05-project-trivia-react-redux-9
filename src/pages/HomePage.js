@@ -47,7 +47,8 @@ class HomePage extends Component {
   }
 
   checkLogin() {
-    if (!this.state.email || !this.state.name) return true;
+    const { email, name } = this.state;
+    if (!email || !name) return true;
     return false;
   }
 
