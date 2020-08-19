@@ -28,23 +28,23 @@ class HomePage extends Component {
           <label htmlFor="email-input"> Email:
             <input
               data-testid="input-gravatar-email"
-              value={email}
-              placeholder="Digite seu e-mail"
-              onChange={(e) => this.setState({ email: e.target.value })} />
+              value={email} placeholder="Digite seu e-mail"
+              onChange={(e) => this.setState({ email: e.target.value })}
+	     />
           </label> <br />
           <label htmlFor="name-input"> Name:
             <input
               data-testid="input-player-name"
-              value={name}
-              placeholder="Digite seu nome"
-              onChange={(e) => this.setState({ name: e.target.value })} />
+              value={name} placeholder="Digite seu nome"
+              onChange={(e) => this.setState({ name: e.target.value })}
+	    />
           </label> <br />
           <Link to="/game">
             <button
               data-testid="btn-play"
               disabled={this.checkLogin()}
-              onClick={() => setLogin(email, name)}>
-              Jogar
+              onClick={() => setLogin(email, name)}
+	    > Jogar
             </button>
           </Link>
           <Link to="/settings">
