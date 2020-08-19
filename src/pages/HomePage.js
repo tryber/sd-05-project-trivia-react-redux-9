@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { setStatus } from '../actions';
 
 class HomePage extends Component {
@@ -21,11 +22,10 @@ class HomePage extends Component {
   render() {
     const { name, email } = this.state;
     const { setLogin } = this.props;
-    const { getMail, getName } = this.props; /* Apenas para testes */
     return (
       <div>
         <form>
-          <label>
+          <label htmlFor="email-input">
             Email:
             <input
               data-testid="input-gravatar-email"
@@ -35,7 +35,7 @@ class HomePage extends Component {
             />
           </label>
           <br />
-          <label>
+          <label htmlFor="name-input">
             Name:
             <input
               data-testid="input-player-name"
@@ -55,29 +55,27 @@ class HomePage extends Component {
             </button>
           </Link>
           <Link to="/settings">
-            <button
-              data-testid="btn-settings"
-            >
-              Configurações
-            </button>
+            <button data-testid="btn-settings"> Configurações </button>
           </Link>
-          <p>{getMail}</p>
-          {' '}
-          {/* Apenas para testes */}
-          <p>{getName}</p>
         </form>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => ({ /* Apenas para testes */
-  getMail: state.loginReducer.email,
-  getName: state.loginReducer.name,
-});
+// const mapStateToProps = (state) => ({
+//   getMail: state.loginReducer.email,
+//   getName: state.loginReducer.name,
+// });
 
 const mapDispatchToProps = (dispatch) => ({
   setLogin: (email, name) => dispatch(setStatus(email, name)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+
+HomePage.propTypes = {
+  setLogin: PropTypes.func.isRequired,
+  getMail: PropTypes.func.isRequired,
+  getName: PropTypes.func.isRequired,
+};
