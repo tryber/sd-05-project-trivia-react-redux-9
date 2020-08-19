@@ -73,6 +73,9 @@ class HomePage extends Component {
           <Link to="/settings">
             <button data-testid="btn-settings"> Configurações </button>
           </Link>
+          <Link to="/ranking">
+            Ranking
+          </Link>
         </form>
       </div>
     );
