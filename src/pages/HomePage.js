@@ -109,7 +109,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
 
 HomePage.propTypes = {
   setLogin: PropTypes.func.isRequired,
-  thunkRequest: PropTypes.func.isRequired,
+  // thunkRequest: PropTypes.func.isRequired,
   data: PropTypes.string.isRequired,
   // getMail: PropTypes.func.isRequired,
   // getName: PropTypes.func.isRequired,
