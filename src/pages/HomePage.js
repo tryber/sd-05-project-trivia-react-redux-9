@@ -56,15 +56,15 @@ class HomePage extends Component {
 
   // função que é chamada ao clicar o botão "jogar"
   clickPlayButton(email, name) {
-    const { data } = this.props;
-    this.props.setLogin(email, name);
-    this.props.thunkRequest();
-    console.log(data)
+    const { data, setLogin } = this.props;
+    setLogin(email, name);
+    thunkRequest();
+    console.log(data);
   }
 
   render() {
     const { name, email } = this.state;
-    const { setLogin } = this.props;
+    // const { setLogin } = this.props;
     return (
       <div>
         <form>
@@ -77,12 +77,13 @@ class HomePage extends Component {
               data-testid="btn-play"
               disabled={this.checkLogin()}
               onClick={() => this.clickPlayButton(email, name)}
+              type="button"
             >
               Jogar
             </button>
           </Link>
           <Link to="/settings">
-            <button data-testid="btn-settings"> Configurações </button>
+            <button data-testid="btn-settings" type="button"> Configurações </button>
           </Link>
           <Link to="/ranking">
             Ranking
@@ -109,6 +110,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
 HomePage.propTypes = {
   setLogin: PropTypes.func.isRequired,
   thunkRequest: PropTypes.func.isRequired,
+  data: PropTypes.string.isRequired,
   // getMail: PropTypes.func.isRequired,
   // getName: PropTypes.func.isRequired,
 };

@@ -26,14 +26,14 @@ export const requestFailed = (error) => ({
   type: REQUEST_FAILED,
   loading: false,
   error: error.message,
-})
+});
 
 export function thunkRequest() {
   return (dispatch) => {
     dispatch(requestLoading());
     return requestAPI()
       .then(
-        (resposta) => dispatch(requestSucess(resposta)),  
+        (resposta) => dispatch(requestSucess(resposta)),
         (error) => dispatch(requestFailed(error)),
       );
   };
