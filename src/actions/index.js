@@ -1,4 +1,4 @@
-import requestAPI from '../services/';
+import requestAPI from '../services';
 
 export const SET_LOGIN = 'SET_LOGIN';
 export const REQUEST_LOADING = 'REQUEST_LOADING';
@@ -26,18 +26,15 @@ export const requestFailed = (error) => ({
   type: REQUEST_FAILED,
   loading: false,
   error: error.message,
-})
+});
 
 export function thunkRequest() {
   return (dispatch) => {
     dispatch(requestLoading());
-      return requestAPI()
-        .then(
-          ()
-        )
-  }
+    return requestAPI()
+      .then(
+        (resposta) => dispatch(requestSucess(resposta)),
+        (error) => dispatch(requestFailed(error)),
+      );
+  };
 }
-
-// {"response_code":0,"response_message":"Token Generated Successfully!","token":"e40bec2c1a71e539d54f75a62581215702ff8e3579b225ef090aa57d3891ac53"}
-
-// PRA MIM VC TÁ ON AQUI
