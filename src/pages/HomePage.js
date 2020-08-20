@@ -62,6 +62,7 @@ class HomePage extends Component {
     setLogin(email, name);
     requestAPI()
       .then((value) => requestToken(value));
+  //  localStorage.setItem('tokenSession', JSON.stringify(value));
   }
 
   render() {
