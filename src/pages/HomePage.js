@@ -60,6 +60,8 @@ class HomePage extends Component {
     const { requestToken, setLogin } = this.props;
     const { email, name } = this.state;
     setLogin(email, name);
+    localStorage.setItem('name', name);
+    localStorage.setItem('score', 0);
     requestAPI()
       .then((value) => {
         requestToken(value);
@@ -108,4 +110,3 @@ HomePage.propTypes = {
   setLogin: PropTypes.func.isRequired,
   requestToken: PropTypes.func.isRequired,
 };
-// oi mamae

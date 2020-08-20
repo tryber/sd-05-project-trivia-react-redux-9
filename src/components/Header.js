@@ -11,16 +11,20 @@ class Header extends Component {
               alt="Player's Name"
             />
           </div>
-          <div data-testid="header-player-name">Jogador: Eduardo</div>
-          <div data-testid="header-player-score">Pontos: 20</div>
+          <div data-testid="header-player-name">
+            Jogador:
+            {localStorage.getItem('name')}
+          </div>
+          <div data-testid="header-player-score">
+            Pontos:
+            {localStorage.getItem('score')}
+          </div>
         </header>
       </div>
     );
   }
 }
 
-// criei cada coisa dentro de uma div separada para facilitar o flexbox (css);
 // coloquei uma imagem genérica pra substituir onde deveria ser a imagem do GravAtar;
-// o nome do jogador e a pontuação devem ser obtidas a partir do LocalStorage (substituir);
 
 export default Header;
