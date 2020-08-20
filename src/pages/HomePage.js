@@ -61,8 +61,10 @@ class HomePage extends Component {
     const { email, name } = this.state;
     setLogin(email, name);
     requestAPI()
-      .then((value) => requestToken(value));
-  //  localStorage.setItem('tokenSession', JSON.stringify(value));
+      .then((value) => {
+        requestToken(value);
+        localStorage.setItem('token', value.token);
+      });
   }
 
   render() {
