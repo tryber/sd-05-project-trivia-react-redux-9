@@ -1,16 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import Header from '../components/Header';
+
 class FeedBack extends React.Component {
   render() {
     return (
       <div>
         <div>
-          <header>
-            <img data-testid="header-profile-picture" alt="user-img" />
-            <h1 data-testid="header-player-name">Eduardo</h1>
-            <h2 data-testid="header-score">50 Pontos</h2>
-          </header>
+          <Header />
         </div>
         <div>
           {/* if (correctAnswer < 3) */}
