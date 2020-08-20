@@ -1,28 +1,20 @@
-import { REQUEST_LOADING, REQUEST_OK, REQUEST_FAILED } from '../actions';
+import {
+  SET_TOKEN,
+} from '../actions';
 
 const INITIAL_STATE = {
   loading: false,
   data: {},
+  token: null,
 };
 
 function requestReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case REQUEST_LOADING:
+    case SET_TOKEN:
       return {
         ...state,
-        loading: true,
-      };
-    case REQUEST_OK:
-      return {
-        ...state,
+        token: action.token,
         loading: false,
-        data: action.data,
-      };
-    case REQUEST_FAILED:
-      return {
-        ...state,
-        loading: false,
-        error: action.error,
       };
     default:
       return state;
