@@ -6,7 +6,7 @@ class Header extends Component {
   render() {
     // const { name, email, hash } = this.props;
     const { name, hash } = this.props;
-    const gravatarURL = "https://www.gravatar.com/avatar/";
+    const gravatarURL = 'https://www.gravatar.com/avatar/';
     return (
       <div>
         <header>

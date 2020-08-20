@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { requestAPI, requestGravatar } from '../services';
+import { requestAPI } from '../services';
 import { setStatus, setToken, setHash } from '../actions';
 
 class HomePage extends Component {
@@ -54,7 +54,7 @@ class HomePage extends Component {
     const hash = CryptoJs.MD5(email).toString();
     hashGravatar(hash);
     // console.log(hash);
-  //  requestGravatar(hash);
+    // requestGravatar(hash);
   }
 
   // função que verifica se os campos email e nome foram preenchidos
@@ -122,4 +122,5 @@ export default connect(null, mapDispatchToProps)(HomePage);
 HomePage.propTypes = {
   setLogin: PropTypes.func.isRequired,
   requestToken: PropTypes.func.isRequired,
+  hashGravatar: PropTypes.string.isRequired,
 };
