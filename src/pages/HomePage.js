@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import CryptoJs from 'crypto-js';
 import { requestAPI } from '../services';
 import { setStatus, setToken, setHash } from '../actions';
 
@@ -50,7 +51,6 @@ class HomePage extends Component {
   getGravatar() {
     const { email } = this.state;
     const { hashGravatar } = this.props;
-    const CryptoJs = require('crypto-js');
     const hash = CryptoJs.MD5(email).toString();
     hashGravatar(hash);
     // console.log(hash);
@@ -122,5 +122,5 @@ export default connect(null, mapDispatchToProps)(HomePage);
 HomePage.propTypes = {
   setLogin: PropTypes.func.isRequired,
   requestToken: PropTypes.func.isRequired,
-  hashGravatar: PropTypes.string.isRequired,
+  hashGravatar: PropTypes.func.isRequired,
 };
