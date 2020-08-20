@@ -99,7 +99,7 @@ const mapDispatchToProps = (dispatch) => ({
   requestToken: (value) => dispatch(setToken(value.token)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(null, mapDispatchToProps)(HomePage);
 
 HomePage.propTypes = {
   setLogin: PropTypes.func.isRequired,
