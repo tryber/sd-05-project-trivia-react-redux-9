@@ -1,9 +1,7 @@
-import requestAPI from '../services/';
-
 export const SET_LOGIN = 'SET_LOGIN';
-export const REQUEST_LOADING = 'REQUEST_LOADING';
-export const REQUEST_OK = 'REQUEST_OK';
-export const REQUEST_FAILED = 'REQUEST_FAILED';
+
+export const SET_TOKEN = 'SET_TOKEN';
+
 
 export const setStatus = (email, name) => ({
   type: SET_LOGIN,
@@ -11,30 +9,7 @@ export const setStatus = (email, name) => ({
   name,
 });
 
-export const requestLoading = () => ({
-  type: REQUEST_LOADING,
-  loading: true,
+export const setToken = (token) => ({
+  type: SET_TOKEN,
+  token,
 });
-
-export const requestSucess = (data) => ({
-  type: REQUEST_OK,
-  loading: false,
-  data: data.token,
-});
-
-export const requestFailed = (error) => ({
-  type: REQUEST_FAILED,
-  loading: false,
-  error: error.message,
-});
-
-export function thunkRequest() {
-  return (dispatch) => {
-    dispatch(requestLoading());
-    return requestAPI()
-      .then(
-        (resposta) => dispatch(requestSucess(resposta)),
-        (error) => dispatch(requestFailed(error)),
-      );
-  };
-}
