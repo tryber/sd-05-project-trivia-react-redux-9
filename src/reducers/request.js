@@ -1,10 +1,11 @@
 import {
   SET_TOKEN,
+  SET_HASH,
 } from '../actions';
 
 const INITIAL_STATE = {
   loading: false,
-  data: {},
+  hash: '',
   token: null,
 };
 
@@ -15,6 +16,12 @@ function requestReducer(state = INITIAL_STATE, action) {
         ...state,
         token: action.token,
         loading: false,
+      };
+
+    case SET_HASH:
+      return {
+        ...state,
+        hash: action.hash,
       };
     default:
       return state;
