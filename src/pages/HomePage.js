@@ -94,12 +94,13 @@ class HomePage extends Component {
   }
 }
 
+
 const mapDispatchToProps = (dispatch) => ({
   setLogin: (email, name) => dispatch(setStatus(email, name)),
   requestToken: (value) => dispatch(setToken(value.token)),
 });
 
-export default connect(null, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
 
 HomePage.propTypes = {
   setLogin: PropTypes.func.isRequired,
