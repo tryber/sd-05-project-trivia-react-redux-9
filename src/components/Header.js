@@ -17,7 +17,7 @@ class Header extends Component {
             Jogador:
             {name}
           </div>
-          <div data-testid="header-player-score">
+          <div data-testid="header-score">
             Pontos:
             {localStorage.getItem('score')}
           </div>
