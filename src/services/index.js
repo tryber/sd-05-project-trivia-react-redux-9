@@ -7,4 +7,5 @@ const requestAPI = () => (
   fetch(URL).then((resposta) => (
     resposta.json()
       .then((data) => (resposta.ok ? Promise.resolve(data) : Promise.reject(data))))));
+
 export default requestAPI;

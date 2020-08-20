@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { setStatus, thunkRequest } from '../actions';
+import requestAPI from '../services';
+import { setStatus, setToken } from '../actions';
 
 class HomePage extends Component {
   constructor(props) {
@@ -55,16 +56,15 @@ class HomePage extends Component {
   }
 
   // função que é chamada ao clicar o botão "jogar"
-  clickPlayButton(email, name) {
-    const { data, setLogin } = this.props;
+  clickPlayButton() {
+    const { requestToken, setLogin } = this.props;
+    const { email, name } = this.state;
     setLogin(email, name);
-    thunkRequest();
-    console.log(data);
+    requestAPI()
+      .then((value) => requestToken(value));
   }
 
   render() {
-    const { name, email } = this.state;
-    // const { setLogin } = this.props;
     return (
       <div>
         <form>
@@ -76,7 +76,7 @@ class HomePage extends Component {
             <button
               data-testid="btn-play"
               disabled={this.checkLogin()}
-              onClick={() => this.clickPlayButton(email, name)}
+              onClick={() => this.clickPlayButton()}
               type="button"
             >
               Jogar
@@ -94,23 +94,15 @@ class HomePage extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  data: state.requestReducer.data,
-  // getMail: state.loginReducer.email,
-  // getName: state.loginReducer.name,
-});
-
 const mapDispatchToProps = (dispatch) => ({
   setLogin: (email, name) => dispatch(setStatus(email, name)),
-  thunkRequest: () => dispatch(thunkRequest()),
+  requestToken: (value) => dispatch(setToken(value.token)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(null, mapDispatchToProps)(HomePage);
 
 HomePage.propTypes = {
   setLogin: PropTypes.func.isRequired,
-  // thunkRequest: PropTypes.func.isRequired,
-  data: PropTypes.string.isRequired,
-  // getMail: PropTypes.func.isRequired,
-  // getName: PropTypes.func.isRequired,
+  requestToken: PropTypes.func.isRequired,
 };
+// oi mamae
