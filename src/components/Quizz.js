@@ -11,8 +11,7 @@ class Quizz extends Component {
       <div>
         {
       (counter < 5) ? (
-        <>
-
+        <div>
           <p data-testid="question-category">
             Category:
             {questions.results[counter].category}
@@ -22,7 +21,7 @@ class Quizz extends Component {
             {questions.results[counter].question}
           </p>
 
-        </>
+        </div>
       )
         : (
           <span />
