@@ -63,7 +63,7 @@ describe('O _header_ deve conter as informações da pessoa jogadora', () => {
   });
 });
 
-describe.only('A página deve conter as informações relacionadas à pergunta', () => {
+describe('A página deve conter as informações relacionadas à pergunta', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/');
     cy.clearLocalStorage();
@@ -202,7 +202,7 @@ describe('Após a resposta ser dada, o botão "Próxima" deve aparecer', () => {
   });
 });
 
-describe('A pessoa que joga deve responder 5 perguntas no total', () => {
+describe.only('A pessoa que joga deve responder 5 perguntas no total', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/');
     cy.clearLocalStorage();

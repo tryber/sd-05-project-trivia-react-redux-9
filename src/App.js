@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import GamePage from './pages/GamePage';
 import SettingsPage from './pages/SettingsPage';
 import RankingPage from './pages/RankingPage';
+import FeedbackPage from './pages/FeedbackPage';
 
 // import logo from './trivia.png';
 
@@ -16,6 +17,7 @@ class App extends Component {
           <Route path="/game" component={GamePage} />
           <Route path="/settings" component={SettingsPage} />
           <Route path="/ranking" component={RankingPage} />
+          <Route path="/feedback" component={FeedbackPage} />
         </Switch>
       </BrowserRouter>
     );
