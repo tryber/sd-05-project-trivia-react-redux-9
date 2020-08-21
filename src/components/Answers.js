@@ -24,10 +24,10 @@ class Answers extends Component {
         >
           {questions.results[0].correct_answer}
         </button>
-        {questions.results[0].incorrect_answers.map((wrong, index) => (
+        {questions.results[0].incorrect_answers.map((wrong) => (
           <button
-            data-testid={`wrong-answer-${index}`}
-            key={index}
+            data-testid={`wrong-answer-${wrong}`}
+            key={wrong}
             onClick={() => this.setVisible()}
           >
             {wrong}
