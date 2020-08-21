@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import Reset from '../components/Reset';
 
 class RankingPage extends Component {
   render() {
     return (
       <div>
-        <Link to="/">
+        {/* <Link to="/">
           <button type="button" data-testid="btn-go-home">Voltar ao início</button>
-        </Link>
+        </Link> */}
+        <Reset />
         <h1>Ranking</h1>
         <table>
           <thead>

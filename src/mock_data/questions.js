@@ -1,5 +1,5 @@
 const questions = {
-  response_code: 0,
+  // response_code: 0,
   results: [
     {
       category: 'Science: Gadgets',
