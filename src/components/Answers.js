@@ -37,10 +37,7 @@ class Answers extends Component {
         ))}
         <br />
         {buttonVisible && (
-          <button
-            type="button"
-            data-testid="btn-next"
-          >
+          <button type="button" data-testid="btn-next">
             Próxima
           </button>
         )}
