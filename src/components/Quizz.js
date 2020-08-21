@@ -20,7 +20,6 @@ class Quizz extends Component {
             {`Question 0${counter + 1}: `}
             {questions.results[counter].question}
           </p>
-
         </div>
       )
         : (
