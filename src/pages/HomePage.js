@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { setStatus } from '../actions';
+import CryptoJs from 'crypto-js';
+import { requestAPI } from '../services';
+import { setStatus, setToken, setHash } from '../actions';
 
 class HomePage extends Component {
   constructor(props) {
@@ -46,16 +48,40 @@ class HomePage extends Component {
     );
   }
 
-  // função que desabilita o botão se não tiver os campos de email & nome preenchidos
+  getGravatar() {
+    const { email } = this.state;
+    const { hashGravatar } = this.props;
+    const hash = CryptoJs.MD5(email).toString();
+    hashGravatar(hash);
+    // console.log(hash);
+    // requestGravatar(hash);
+  }
+
+  // função que verifica se os campos email e nome foram preenchidos
+  // pra então habilitar o botão "jogar"
   checkLogin() {
     const { email, name } = this.state;
     if (!email || !name) return true;
     return false;
   }
 
+  // função que é chamada ao clicar o botão "jogar"
+  clickPlayButton() {
+    const { requestToken, setLogin } = this.props;
+    const { email, name } = this.state;
+    setLogin(email, name);
+    // localStorage.setItem('name', name);
+    // localStorage.setItem('mail', email);
+    localStorage.setItem('score', 0);
+    requestAPI()
+      .then((value) => {
+        requestToken(value);
+        localStorage.setItem('token', value.token);
+      });
+    this.getGravatar();
+  }
+
   render() {
-    const { name, email } = this.state;
-    const { setLogin } = this.props;
     return (
       <div>
         <form>
@@ -67,14 +93,14 @@ class HomePage extends Component {
             <button
               data-testid="btn-play"
               disabled={this.checkLogin()}
-              onClick={() => setLogin(email, name)}
+              onClick={() => this.clickPlayButton()}
               type="button"
             >
               Jogar
             </button>
           </Link>
           <Link to="/settings">
-            <button data-testid="btn-settings"> Configurações </button>
+            <button data-testid="btn-settings" type="button"> Configurações </button>
           </Link>
           <Link to="/ranking">
             Ranking
@@ -85,17 +111,16 @@ class HomePage extends Component {
   }
 }
 
-// const mapStateToProps = (state) => ({
-//   getMail: state.loginReducer.email,
-//   getName: state.loginReducer.name,
-// });
-
 const mapDispatchToProps = (dispatch) => ({
   setLogin: (email, name) => dispatch(setStatus(email, name)),
+  requestToken: (value) => dispatch(setToken(value.token)),
+  hashGravatar: (hash) => dispatch(setHash(hash)),
 });
 
 export default connect(null, mapDispatchToProps)(HomePage);
 
 HomePage.propTypes = {
   setLogin: PropTypes.func.isRequired,
+  requestToken: PropTypes.func.isRequired,
+  hashGravatar: PropTypes.func.isRequired,
 };
