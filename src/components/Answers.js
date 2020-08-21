@@ -5,20 +5,21 @@ class Answers extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      chosed: true,
+      buttonVisible: false,
     };
     this.setVisible = this.setVisible.bind(this);
   }
 
   setVisible() {
-    this.setState({ chosed: false });
+    this.setState({ buttonVisible: true });
   }
 
   render() {
-    const { chosed } = this.state;
+    const { buttonVisible } = this.state;
     return (
       <div>
         <button
+          type="button"
           data-testid="correct-answer"
           onClick={() => this.setVisible()}
         >
@@ -26,6 +27,7 @@ class Answers extends Component {
         </button>
         {questions.results[0].incorrect_answers.map((wrong) => (
           <button
+            type="button"
             data-testid={`wrong-answer-${wrong}`}
             key={wrong}
             onClick={() => this.setVisible()}
@@ -34,14 +36,14 @@ class Answers extends Component {
           </button>
         ))}
         <br />
-        <button
-          type="button"
-          data-testid="btn-next"
-          // disabled={chosed}
-          visibility={chosed}
-        >
-          Próxima
-        </button>
+        {buttonVisible && (
+          <button
+            type="button"
+            data-testid="btn-next"
+          >
+            Próxima
+          </button>
+        )}
       </div>
     );
   }
