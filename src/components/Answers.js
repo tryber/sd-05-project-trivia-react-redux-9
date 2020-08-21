@@ -57,6 +57,7 @@ class Answers extends Component {
     // this.correctButton();
     // this.wrongButtons();
     const { counter } = this.props;
+
     return (
       <div>
         <button
