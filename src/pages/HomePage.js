@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import CryptoJs from 'crypto-js';
 import { requestAPI } from '../services';
 import { setStatus, setToken, setHash } from '../actions';
+import RankingBtn from '../components/RankingBtn';
 
 class HomePage extends Component {
   constructor(props) {
@@ -67,12 +68,11 @@ class HomePage extends Component {
 
   // função que é chamada ao clicar o botão "jogar"
   clickPlayButton() {
-    const { requestToken, setLogin } = this.props;
+    const { requestToken, setLogin, player } = this.props;
     const { email, name } = this.state;
     setLogin(email, name);
-    // localStorage.setItem('name', name);
-    // localStorage.setItem('mail', email);
-    localStorage.setItem('score', 0);
+    console.log(player);
+    localStorage.setItem('player', JSON.stringify(player));
     requestAPI()
       .then((value) => {
         requestToken(value);
@@ -102,25 +102,27 @@ class HomePage extends Component {
           <Link to="/settings">
             <button data-testid="btn-settings" type="button"> Configurações </button>
           </Link>
-          <Link to="/ranking">
-            Ranking
-          </Link>
+          <RankingBtn />
         </form>
       </div>
     );
   }
 }
 
+const mapStateToProps = (state) => ({
+  player: state.loginReducer.player,
+});
 const mapDispatchToProps = (dispatch) => ({
   setLogin: (email, name) => dispatch(setStatus(email, name)),
   requestToken: (value) => dispatch(setToken(value.token)),
   hashGravatar: (hash) => dispatch(setHash(hash)),
 });
 
-export default connect(null, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
 
 HomePage.propTypes = {
   setLogin: PropTypes.func.isRequired,
   requestToken: PropTypes.func.isRequired,
   hashGravatar: PropTypes.func.isRequired,
+  player: PropTypes.func.isRequired,
 };
