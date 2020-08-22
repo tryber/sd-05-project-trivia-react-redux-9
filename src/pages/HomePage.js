@@ -124,5 +124,5 @@ HomePage.propTypes = {
   setLogin: PropTypes.func.isRequired,
   requestToken: PropTypes.func.isRequired,
   hashGravatar: PropTypes.func.isRequired,
-  player: PropTypes.object.isRequired,
+  player: PropTypes.func.isRequired,
 };
