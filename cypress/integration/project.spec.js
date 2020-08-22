@@ -202,7 +202,7 @@ describe('Após a resposta ser dada, o botão "Próxima" deve aparecer', () => {
   });
 });
 
-describe.only('A pessoa que joga deve responder 5 perguntas no total', () => {
+describe('A pessoa que joga deve responder 5 perguntas no total', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/');
     cy.clearLocalStorage();
