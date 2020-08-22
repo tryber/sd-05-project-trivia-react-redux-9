@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Quizz from '../components/Quizz';
 import Answers from '../components/Answers';
 import Reset from '../components/Reset';
-import questions from '../mock_data/questions';
+// import questions from '../mock_data/questions';
+import { requestQuestions } from '../services';
+import {getQuestions} from '../actions';
 
 class GamePage extends Component {
+
   componentDidMount() {
-    const trivia = questions.results;
-    console.log(trivia);
+    const {setQuizz} = this.props;
+    //  const trivia = questions.results;
+    //  console.log(trivia);
+    const token = localStorage.getItem('token');
+    requestQuestions(token)
+      .then((data) => setQuizz(data));
   }
 
   render() {
@@ -23,4 +32,12 @@ class GamePage extends Component {
   }
 }
 
-export default GamePage;
+const mapDispatchToProps = (dispatch) => ({
+  setQuizz: (data) => dispatch(getQuestions(data)),
+});
+
+export default connect(null, mapDispatchToProps)(GamePage);
+
+GamePage.propTypes = {
+  setQuizz: PropTypes.func.isRequired,
+};
