@@ -22,8 +22,7 @@ export const requestQuestions = (token) => (
     .then((response) => (
       response.json()
         .then(
-          (data) => (response.ok ? Promise.resolve(data.results) : Promise.reject(data.results))
+          (data) => (response.ok ? Promise.resolve(data.results) : Promise.reject(data.results)),
         )
     ))
 );
-// ps. i love you, codeclimate
