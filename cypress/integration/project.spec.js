@@ -100,7 +100,7 @@ describe('Só deve ser possível escolher uma resposta correta por pergunta', ()
   });
 });
 
-describe.only('Ao clicar em uma resposta, a resposta correta deve ficar verde e as incorretas, vermelhas', () => {
+describe('Ao clicar em uma resposta, a resposta correta deve ficar verde e as incorretas, vermelhas', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/');
     cy.clearLocalStorage();
@@ -451,7 +451,7 @@ describe('Apresentação do _ranking_', () => {
 
 // feedback
 
-describe('O _header_ de _feedback_ deve conter as informações da pessoa jogadora', () => {
+describe.only('O _header_ de _feedback_ deve conter as informações da pessoa jogadora', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/');
     cy.clearLocalStorage();

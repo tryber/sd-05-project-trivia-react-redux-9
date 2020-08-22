@@ -18,8 +18,7 @@ class Header extends Component {
             {name}
           </div>
           <div data-testid="header-score">
-            Pontos:
-            {JSON.parse(localStorage.getItem('player')).score}
+            {JSON.parse(localStorage.getItem('state')).player.score}
           </div>
         </header>
       </div>
