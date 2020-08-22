@@ -24,9 +24,9 @@ export const setHash = (hash) => ({
 export const getQuestions = (gameData) => ({
   type: GET_QUESTIONS,
   gameData,
+});
 
 export const setCounter = (counter) => ({
   type: SET_COUNTER,
   counter,
-
 });
