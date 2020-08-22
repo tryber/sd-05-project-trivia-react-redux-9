@@ -100,7 +100,7 @@ describe('Só deve ser possível escolher uma resposta correta por pergunta', ()
   });
 });
 
-describe('Ao clicar em uma resposta, a resposta correta deve ficar verde e as incorretas, vermelhas', () => {
+describe.only('Ao clicar em uma resposta, a resposta correta deve ficar verde e as incorretas, vermelhas', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/');
     cy.clearLocalStorage();
