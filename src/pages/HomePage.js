@@ -54,25 +54,22 @@ class HomePage extends Component {
     const { hashGravatar } = this.props;
     const hash = CryptoJs.MD5(email).toString();
     hashGravatar(hash);
-    // console.log(hash);
-    // requestGravatar(hash);
   }
 
   // função que verifica se os campos email e nome foram preenchidos
   // pra então habilitar o botão "jogar"
   checkLogin() {
     const { email, name } = this.state;
-    if (!email || !name) return true;
-    return false;
+    return !(email && name);
   }
 
   // função que é chamada ao clicar o botão "jogar"
   clickPlayButton() {
-    const { requestToken, setLogin, player } = this.props;
+    const { requestToken, setLogin, ranking } = this.props;
     const { email, name } = this.state;
     setLogin(email, name);
-    console.log(player);
-    localStorage.setItem('player', JSON.stringify(player));
+    console.log(ranking);
+    localStorage.setItem('state', JSON.stringify(ranking));
     requestAPI()
       .then((value) => {
         requestToken(value);
@@ -110,7 +107,7 @@ class HomePage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  player: state.loginReducer.player,
+  ranking: state.loginReducer.ranking,
 });
 const mapDispatchToProps = (dispatch) => ({
   setLogin: (email, name) => dispatch(setStatus(email, name)),
@@ -124,5 +121,5 @@ HomePage.propTypes = {
   setLogin: PropTypes.func.isRequired,
   requestToken: PropTypes.func.isRequired,
   hashGravatar: PropTypes.func.isRequired,
-  player: PropTypes.func.isRequired,
+  ranking: PropTypes.func.isRequired,
 };

@@ -3,8 +3,10 @@ import { SET_LOGIN } from '../actions';
 const INITIAL_STATE = {
   email: '',
   name: '',
-  player: {
-    score: 0,
+  ranking: {
+    player: {
+      score: 0,
+    },
   },
 };
 

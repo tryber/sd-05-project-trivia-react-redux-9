@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// import {correct, wrong} from '../App.css';
+import '../App.css';
 import FeedbackBtn from './FeedbackBtn';
 import questions from '../mock_data/questions';
-import { setCounter } from '../actions';
+import { setCounter, getAnswer, resetColors } from '../actions';
 
 class Answers extends Component {
   constructor(props) {
@@ -13,8 +13,6 @@ class Answers extends Component {
       buttonVisible: false,
     };
     this.setVisible = this.setVisible.bind(this);
-    // this.correctButton = this.correctButton.bind(this);
-    // this.wrongButtons = this.wrongButtons.bind(this);
     this.answerButtons = this.answerButtons.bind(this);
   }
 
@@ -22,59 +20,25 @@ class Answers extends Component {
     this.setState({ buttonVisible: true });
   }
 
-  // correctButton() {
-  //   const { counter } = this.props;
-  //   return (
-  //     <button
-  //       type="button"
-  //       className="correct"
-  //       data-testid="correct-answer"
-  //       onClick={() => this.setVisible()}
-  //     >
-  //       {questions.results[counter].correct_answer}
-  //     </button>
-  //   );
-  // }
-
-  // wrongButtons() {
-  //   const { counter } = this.props;
-  //   return (
-  //     questions.results[counter].incorrect_answers.map((wrong) => (
-  //       <button
-  //         type="button"
-  //         className="wrong"
-  //         data-testid={`wrong-answer-${wrong}`}
-  //         key={wrong}
-  //         onClick={() => this.setVisible()}
-  //       >
-  //         {wrong}
-  //       </button>
-  //     ))
-  //   );
-  // }
-
   answerButtons() {
-    // this.correctButton();
-    // this.wrongButtons();
-    const { counter } = this.props;
-
+    const { counter, correctanswer, wronganswer, setCorrectAnswer } = this.props;
     return (
       <div>
         <button
           type="button"
-          className="correct"
+          className={correctanswer}
           data-testid="correct-answer"
-          onClick={() => this.setVisible()}
+          onClick={() => { this.setVisible(); setCorrectAnswer(); }}
         >
           {questions.results[counter].correct_answer}
         </button>
         {questions.results[counter].incorrect_answers.map((wrong) => (
           <button
             type="button"
-            className="wrong"
+            className={wronganswer}
             data-testid={`wrong-answer-${wrong}`}
             key={wrong}
-            onClick={() => this.setVisible()}
+            onClick={() => { this.setVisible(); setCorrectAnswer(); }}
           >
             {wrong}
           </button>
@@ -85,10 +49,9 @@ class Answers extends Component {
 
   render() {
     const { buttonVisible } = this.state;
-    const { counter, increaseCounter } = this.props;
+    const { counter, increaseCounter, resetColorBtn } = this.props;
     return (
       <div>
-        {/* {this.answerButtons()} */}
         {(counter < 5) ? (this.answerButtons())
           : (<span />)}
         <br />
@@ -97,7 +60,7 @@ class Answers extends Component {
           <button
             type="button"
             data-testid="btn-next"
-            onClick={() => increaseCounter(counter)}
+            onClick={() => { increaseCounter(counter); resetColorBtn(); }}
           >
             Próxima
           </button>
@@ -109,10 +72,14 @@ class Answers extends Component {
 
 const mapStateToProps = (state) => ({
   counter: state.requestReducer.counter,
+  correctanswer: state.questionsReducer.correct,
+  wronganswer: state.questionsReducer.wrong,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   increaseCounter: (counter) => dispatch(setCounter(counter)),
+  setCorrectAnswer: () => dispatch(getAnswer('correct', 'wrong')),
+  resetColorBtn: () => dispatch(resetColors()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Answers);
@@ -120,4 +87,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(Answers);
 Answers.propTypes = {
   increaseCounter: PropTypes.func.isRequired,
   counter: PropTypes.func.isRequired,
+  correctanswer: PropTypes.func.isRequired,
+  wronganswer: PropTypes.func.isRequired,
+  setCorrectAnswer: PropTypes.func.isRequired,
+  resetColorBtn: PropTypes.func.isRequired,
 };

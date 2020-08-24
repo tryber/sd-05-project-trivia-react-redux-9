@@ -6,9 +6,6 @@ class RankingPage extends Component {
   render() {
     return (
       <div>
-        {/* <Link to="/">
-          <button type="button" data-testid="btn-go-home">Voltar ao início</button>
-        </Link> */}
         <Reset />
         <h1>Ranking</h1>
         <table>
