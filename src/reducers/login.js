@@ -10,6 +10,21 @@ const INITIAL_STATE = {
   },
 };
 
+const sendToStorage = (state, action) => {
+  localStorage.setItem('state', JSON.stringify(
+    {
+      ...state,
+      ranking: {
+        ...state.ranking,
+        player: {
+          ...state.ranking.player,
+          score: action.score + state.ranking.player.score,
+        },
+      },
+    },
+  ));
+};
+
 const loginReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SET_LOGIN:
@@ -19,6 +34,7 @@ const loginReducer = (state = INITIAL_STATE, action) => {
         name: action.name,
       };
     case SET_SCORE: // https://bit.ly/34sZRhl
+      sendToStorage(state, action);
       return {
         ...state,
         ranking: {
