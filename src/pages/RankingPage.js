@@ -1,36 +1,38 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Reset from '../components/Reset';
+import PropTypes from 'prop-types';
+
+const ranking = JSON.parse(localStorage.getItem('ranking'))
+  .sort((a, b) => b.score - a.score);
 
 class RankingPage extends Component {
   render() {
+    const { hash } = this.props;
     return (
       <div>
         <Reset />
-        <h1>Ranking</h1>
-        <table>
-          <thead>
-            <th>Jogador</th>
-            <th>Pontuação</th>
-          </thead>
-          <tbody>
-            <tr>
-              <td data-testid="player-name-0">Eduardo</td>
-              <td data-testid="player-score-0">50 pontos</td>
-            </tr>
-            <tr>
-              <td data-testid="player-name-1">Camila</td>
-              <td data-testid="player-score-1">45 pontos</td>
-            </tr>
-          </tbody>
-        </table>
+        <h1 data-testid="ranking-title">Ranking</h1>
+        {ranking.map((user, index) => {
+          return (
+            <div>
+              <p data-testid={`player-name-${index}`}>{user.name}}</p>
+              <p data-testid={`player-score-${index}`}>{user.score}</p>
+              <img src={`https://www.gravatar.com/avatar/${hash}`} alt={user.name} />
+            </div>
+          );
+        })}
       </div>
     );
   }
 }
 
-// OBS.1: data-testid com o valor player-name-${index} e player-score-${index}
-// onde ${index} é iniciado em zero
-// OBS.2: o ranking deve ser armazenado no LocalStorage.
+const mapStateToProps = (state) => ({
+  hash: state.requestReducer.hash,
+});
 
-export default RankingPage;
+export default connect (mapStateToProps)(RankingPage);
+
+RankingPage.propTypes = {
+  hash: PropTypes.string.isRequired,
+};
