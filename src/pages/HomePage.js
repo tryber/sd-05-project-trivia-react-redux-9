@@ -107,7 +107,7 @@ class HomePage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  fullscore: state.loginReducer.score,
+  fullscore: state.loginReducer,
 });
 const mapDispatchToProps = (dispatch) => ({
   setLogin: (email, name) => dispatch(setStatus(email, name)),
