@@ -16,14 +16,8 @@ class RankingPage extends Component {
         {rankingSorted.map((user, index) => (
           <div>
             <img src={`https://www.gravatar.com/avatar/${hash}`} alt={user.name} />
-            <p data-testid={`player-name-${index}`}>
-              Player:
-              {user.name}
-            </p>
-            <p data-testid={`player-score-${index}`}>
-              Score:
-              {user.score}
-            </p>
+            <p>Player:<span data-testid={`player-name-${index}`}>{user.name}</span></p>
+            <p>Score:<span data-testid={`player-score-${index}`}>{user.score}</span></p>
           </div>
         ))}
       </div>
