@@ -30,7 +30,7 @@ const mapStateToProps = (state) => ({
   name: state.loginReducer.name,
   // email: state.loginReducer.email,
   hash: state.requestReducer.hash,
-  score: state.loginReducer.ranking.player.score,
+  score: state.loginReducer.score,
 });
 
 // coloquei uma imagem genérica pra substituir onde deveria ser a imagem do GravAtar;
