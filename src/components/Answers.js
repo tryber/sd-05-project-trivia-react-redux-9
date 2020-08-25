@@ -42,7 +42,9 @@ class Answers extends Component {
   }
 
   answerButtons() {
-    const { counter, correctanswer, wronganswer, setCorrectAnswer } = this.props;
+    const {
+      counter, correctanswer, wronganswer, setCorrectAnswer, shuffle,
+    } = this.props;
     return (
       <div>
         <button
@@ -51,9 +53,9 @@ class Answers extends Component {
           data-testid="correct-answer"
           onClick={() => { this.setVisible(); setCorrectAnswer(); this.updateScore(counter); }}
         >
-          {questions.results[counter].correct_answer}
+          {questions.results[shuffle].correct_answer}
         </button>
-        {questions.results[counter].incorrect_answers.map((wrong) => (
+        {questions.results[shuffle].incorrect_answers.map((wrong) => (
           <button
             type="button"
             className={wronganswer}
@@ -95,6 +97,7 @@ const mapStateToProps = (state) => ({
   counter: state.requestReducer.counter,
   correctanswer: state.questionsReducer.correct,
   wronganswer: state.questionsReducer.wrong,
+  shuffle: state.questionsReducer.shuffle,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -108,10 +111,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(Answers);
 
 Answers.propTypes = {
   increaseCounter: PropTypes.func.isRequired,
-  counter: PropTypes.func.isRequired,
-  correctanswer: PropTypes.func.isRequired,
-  wronganswer: PropTypes.func.isRequired,
+  counter: PropTypes.number.isRequired,
+  correctanswer: PropTypes.string.isRequired,
+  wronganswer: PropTypes.string.isRequired,
   setCorrectAnswer: PropTypes.func.isRequired,
   resetColorBtn: PropTypes.func.isRequired,
   changeScore: PropTypes.func.isRequired,
+  shuffle: PropTypes.number.isRequired,
 };

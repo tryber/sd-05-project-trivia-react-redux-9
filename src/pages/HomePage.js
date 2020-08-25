@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import CryptoJs from 'crypto-js';
+import '../App.css';
 import { requestAPI } from '../services';
 import { setStatus, setToken, setHash } from '../actions';
 import RankingBtn from '../components/RankingBtn';
@@ -78,7 +79,7 @@ class HomePage extends Component {
 
   render() {
     return (
-      <div>
+      <div className="wrapper">
         <form>
           {this.getEmail()}
           <br />

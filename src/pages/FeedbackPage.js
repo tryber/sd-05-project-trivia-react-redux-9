@@ -13,14 +13,19 @@ class FeedBack extends React.Component {
           <Header />
         </div>
         <div>
-          {/* if (correctAnswer < 3) */}
-          <p data-testid="feedback-text">Podia ser melhor...</p>
-          {/* else */}
-          <p data-testid="feedback-text">Mandou bem!</p>
+          {assertions < 3
+            ? <p data-testid="feedback-text">Podia ser melhor...</p>
+            : <p data-testid="feedback-text">Mandou bem!</p>}
         </div>
         <div>
-          <p>Placar Final:<span data-testid="feedback-total-score">{score}</span></p>
-          <p>Número de Acertos: <span data-testid="feedback-total-question">{assertions}</span></p>
+          <p>
+            Placar Final:
+            <span data-testid="feedback-total-score">{score}</span>
+          </p>
+          <p>
+            Número de Acertos:
+            <span data-testid="feedback-total-question">{assertions}</span>
+          </p>
         </div>
         <div>
           <Link to="/">
@@ -43,6 +48,6 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps)(FeedBack);
 
 FeedBack.propTypes = {
-  score: PropTypes.string.isRequired,
-  assertions: PropTypes.string.isRequired,
+  score: PropTypes.number.isRequired,
+  assertions: PropTypes.number.isRequired,
 };

@@ -40,5 +40,5 @@ export default connect(mapStateToProps)(Header);
 Header.propTypes = {
   name: PropTypes.string.isRequired,
   hash: PropTypes.string.isRequired,
-  score: PropTypes.string.isRequired,
+  score: PropTypes.number.isRequired,
 };

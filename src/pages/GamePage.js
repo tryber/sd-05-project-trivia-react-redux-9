@@ -11,11 +11,8 @@ import { getQuestions } from '../actions';
 import RankingBtn from '../components/RankingBtn';
 
 class GamePage extends Component {
-
   componentDidMount() {
     const { setQuizz } = this.props;
-    //  const trivia = questions.results;
-    //  console.log(trivia);
     const token = localStorage.getItem('token');
     requestQuestions(token)
       .then((data) => setQuizz(data));
