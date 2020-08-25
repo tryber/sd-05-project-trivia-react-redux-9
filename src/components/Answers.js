@@ -8,6 +8,12 @@ import {
   setCounter, getAnswer, resetColors, setScore,
 } from '../actions';
 
+const difLevels = {
+  hard: 3,
+  medium: 2,
+  easy: 1,
+};
+
 class Answers extends Component {
   constructor(props) {
     super(props);
@@ -27,9 +33,7 @@ class Answers extends Component {
   updateScore(id) {
     const { score } = this.state;
     const { changeScore } = this.props;
-    const valor = 10 + (((questions.results[id].difficulty === 'hard') ? 3
-    : (questions.results[id].difficulty === 'medium') ? 2
-      : 1) * 30);
+    const valor = 10 + (difLevels[questions.results[id].difficulty] * 20);
     this.setState({
       score: score + valor,
     });
