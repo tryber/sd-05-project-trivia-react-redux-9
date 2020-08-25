@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Header from '../components/Header';
 
 class FeedBack extends React.Component {
   render() {
+    const { score, assertions } = this.props;
     return (
       <div>
         <div>
@@ -17,8 +19,8 @@ class FeedBack extends React.Component {
           <p data-testid="feedback-text">Mandou bem!</p>
         </div>
         <div>
-          <p data-testid="feedback-total-score">Placar Final:</p>
-          <p data-testid="feedback-total-question">Número de Acertos:</p>
+          <p>Placar Final:<span data-testid="feedback-total-score">{score}</span></p>
+          <p>Número de Acertos: <span data-testid="feedback-total-question">{assertions}</span></p>
         </div>
         <div>
           <Link to="/">
@@ -33,4 +35,14 @@ class FeedBack extends React.Component {
   }
 }
 
-export default FeedBack;
+const mapStateToProps = (state) => ({
+  score: state.loginReducer.score,
+  assertions: state.loginReducer.assertions,
+});
+
+export default connect(mapStateToProps)(FeedBack);
+
+FeedBack.propTypes = {
+  score: PropTypes.string.isRequired,
+  assertions: PropTypes.string.isRequired,
+};

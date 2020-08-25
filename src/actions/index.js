@@ -6,6 +6,7 @@ export const GET_ANSWER = 'GET_ANSWER';
 export const STORE_QUESTIONS = 'STORE_QUESTIONS';
 export const SET_COUNTER = 'SET_COUNTER';
 export const RESET_COLORS = 'RESET_COLORS';
+export const SET_SCORE = 'SET_SCORE';
 
 export const setStatus = (email, name) => ({
   type: SET_LOGIN,
@@ -41,4 +42,9 @@ export const getAnswer = (correct, wrong) => ({
 
 export const resetColors = () => ({
   type: RESET_COLORS,
+});
+
+export const setScore = (score) => ({
+  type: SET_SCORE,
+  score,
 });
