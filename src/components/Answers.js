@@ -1,23 +1,40 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import '../App.css';
-import FeedbackBtn from './FeedbackBtn';
+// import FeedbackBtn from './FeedbackBtn';
 import questions from '../mock_data/questions';
-import { setCounter, getAnswer, resetColors } from '../actions';
+import {
+  setCounter, getAnswer, resetColors, setScore,
+} from '../actions';
 
 class Answers extends Component {
   constructor(props) {
     super(props);
     this.state = {
       buttonVisible: false,
+      score: 0,
     };
     this.setVisible = this.setVisible.bind(this);
     this.answerButtons = this.answerButtons.bind(this);
+    this.updateScore = this.updateScore.bind(this);
   }
 
   setVisible() {
     this.setState({ buttonVisible: true });
+  }
+
+  updateScore(id) {
+    const { score } = this.state;
+    const { changeScore } = this.props;
+    this.setState({
+      score: score
+      + 10 + ((questions.results[id].difficulty === 'hard') ? 3
+        : (questions.results[id].difficulty === 'medium') ? 2
+          : 1) * 30,
+    });
+    changeScore(score);
   }
 
   answerButtons() {
@@ -28,7 +45,7 @@ class Answers extends Component {
           type="button"
           className={correctanswer}
           data-testid="correct-answer"
-          onClick={() => { this.setVisible(); setCorrectAnswer(); }}
+          onClick={() => { this.setVisible(); setCorrectAnswer(); this.updateScore(counter); }}
         >
           {questions.results[counter].correct_answer}
         </button>
@@ -55,7 +72,7 @@ class Answers extends Component {
         {(counter < 5) ? (this.answerButtons())
           : (<span />)}
         <br />
-        {(counter === 5) ? <FeedbackBtn />
+        {(counter === 5) ? <Redirect to="/feedback" />
           : buttonVisible && (
           <button
             type="button"
@@ -80,6 +97,7 @@ const mapDispatchToProps = (dispatch) => ({
   increaseCounter: (counter) => dispatch(setCounter(counter)),
   setCorrectAnswer: () => dispatch(getAnswer('correct', 'wrong')),
   resetColorBtn: () => dispatch(resetColors()),
+  changeScore: (score) => dispatch(setScore(score)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Answers);
@@ -91,4 +109,5 @@ Answers.propTypes = {
   wronganswer: PropTypes.func.isRequired,
   setCorrectAnswer: PropTypes.func.isRequired,
   resetColorBtn: PropTypes.func.isRequired,
+  changeScore: PropTypes.func.isRequired,
 };

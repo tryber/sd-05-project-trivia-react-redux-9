@@ -65,11 +65,11 @@ class HomePage extends Component {
 
   // função que é chamada ao clicar o botão "jogar"
   clickPlayButton() {
-    const { requestToken, setLogin, ranking } = this.props;
+    const { requestToken, setLogin, fullscore } = this.props;
     const { email, name } = this.state;
     setLogin(email, name);
-    console.log(ranking);
-    localStorage.setItem('state', JSON.stringify(ranking));
+    console.log(fullscore);
+    localStorage.setItem('state', JSON.stringify(fullscore));
     requestAPI()
       .then((value) => {
         requestToken(value);
@@ -107,7 +107,7 @@ class HomePage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  ranking: state.loginReducer.ranking,
+  fullscore: state.loginReducer.ranking,
 });
 const mapDispatchToProps = (dispatch) => ({
   setLogin: (email, name) => dispatch(setStatus(email, name)),
@@ -121,5 +121,5 @@ HomePage.propTypes = {
   setLogin: PropTypes.func.isRequired,
   requestToken: PropTypes.func.isRequired,
   hashGravatar: PropTypes.func.isRequired,
-  ranking: PropTypes.func.isRequired,
+  fullscore: PropTypes.func.isRequired,
 };

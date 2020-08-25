@@ -1,4 +1,4 @@
-import { SET_LOGIN } from '../actions';
+import { SET_LOGIN, SET_SCORE } from '../actions';
 
 const INITIAL_STATE = {
   email: '',
@@ -17,6 +17,17 @@ const loginReducer = (state = INITIAL_STATE, action) => {
         ...state,
         email: action.email,
         name: action.name,
+      };
+    case SET_SCORE: // https://bit.ly/34sZRhl
+      return {
+        ...state,
+        ranking: {
+          ...state.ranking,
+          player: {
+            ...state.ranking.player,
+            score: action.score,
+          },
+        },
       };
     default:
       return state;

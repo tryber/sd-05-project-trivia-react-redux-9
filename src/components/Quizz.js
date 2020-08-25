@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import questions from '../mock_data/questions';
-// import categories from '../mock_data/categories';
+// import FeedbackPage from '../pages/FeedbackPage';
 
 class Quizz extends Component {
   render() {

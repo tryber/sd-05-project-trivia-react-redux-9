@@ -451,7 +451,7 @@ describe('Apresentação do _ranking_', () => {
 
 // feedback
 
-describe.only('O _header_ de _feedback_ deve conter as informações da pessoa jogadora', () => {
+describe('O _header_ de _feedback_ deve conter as informações da pessoa jogadora', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/');
     cy.clearLocalStorage();
