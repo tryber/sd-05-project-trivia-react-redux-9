@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Reset from '../components/Reset';
 import PropTypes from 'prop-types';
+import Reset from '../components/Reset';
 
 const ranking = JSON.parse(localStorage.getItem('ranking'))
   .sort((a, b) => b.score - a.score);
