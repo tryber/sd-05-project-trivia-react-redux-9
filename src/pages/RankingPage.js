@@ -7,7 +7,7 @@ class RankingPage extends Component {
     return (
       <div>
         <Reset />
-        <h1>Ranking</h1>
+        <h1 data-testid="ranking-title">Ranking</h1>
         <table>
           <thead>
             <th>Jogador</th>
