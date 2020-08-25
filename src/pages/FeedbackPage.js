@@ -5,11 +5,6 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 
 class Feedback extends React.Component {
-  componentDidMount() {
-    const { name, score, picture } = this.props;
-    
-  };
-
   render() {
     const { score, assertions } = this.props;
     return (
@@ -46,8 +41,6 @@ class Feedback extends React.Component {
 const mapStateToProps = (state) => ({
   score: state.loginReducer.score,
   assertions: state.loginReducer.assertions,
-  name: state.loginReducer.name,
-  picture: state.user.gravatarEmail,
 });
 
 export default connect(mapStateToProps)(Feedback);
