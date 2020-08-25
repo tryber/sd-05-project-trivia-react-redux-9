@@ -1,20 +1,33 @@
 import { SET_LOGIN, SET_SCORE } from '../actions';
 
 const INITIAL_STATE = {
-  email: '',
   name: '',
   score: 0,
   assertions: 0,
+  gravatarEmail: '',
 };
 
-const sendToStorage = (state, action) => {
+const storageUser = (state, action) => {
   localStorage.setItem('state', JSON.stringify(
     {
       player: {
-        name: state.name,
+        ...state,
+        name: action.name,
+        gravatarEmail: action.email,
+        assertions: 0,
+        score: 0,
+      },
+    },
+  ));
+};
+
+const storageScore = (state, action) => {
+  localStorage.setItem('state', JSON.stringify(
+    {
+      player: {
+        ...state,
         assertions: state.assertions + 1,
         score: action.score + state.score,
-        gravatarEmail: state.email,
       },
     },
   ));
@@ -23,13 +36,16 @@ const sendToStorage = (state, action) => {
 const loginReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SET_LOGIN:
+      storageUser(state, action);
       return {
         ...state,
-        email: action.email,
         name: action.name,
+        gravatarEmail: action.email,
+        assertions: 0,
+        score: 0,
       };
     case SET_SCORE: // https://bit.ly/34sZRhl
-      sendToStorage(state, action);
+      storageScore(state, action);
       return {
         ...state,
         score: action.score + state.score,

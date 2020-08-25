@@ -27,7 +27,8 @@ class Answers extends Component {
   }
 
   setVisible() {
-    this.setState({ buttonVisible: true });
+    const { buttonVisible } = this.state;
+    this.setState({ buttonVisible: !buttonVisible });
   }
 
   updateScore(id) {
@@ -80,7 +81,7 @@ class Answers extends Component {
           <button
             type="button"
             data-testid="btn-next"
-            onClick={() => { increaseCounter(counter); resetColorBtn(); }}
+            onClick={() => { this.setVisible(); increaseCounter(counter); resetColorBtn(); }}
           >
             Próxima
           </button>
