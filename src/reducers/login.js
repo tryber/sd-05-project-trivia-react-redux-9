@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   ranking: {
     player: {
       score: 0,
+      assertions: 0,
     },
   },
 };
@@ -18,6 +19,7 @@ const sendToStorage = (state, action) => {
         ...state.ranking,
         player: {
           ...state.ranking.player,
+          assertions: state.ranking.player.assertions + 1,
           score: action.score + state.ranking.player.score,
         },
       },
@@ -42,6 +44,7 @@ const loginReducer = (state = INITIAL_STATE, action) => {
           player: {
             ...state.ranking.player,
             score: action.score + state.ranking.player.score,
+            assertions: state.ranking.player.assertions + 1,
           },
         },
       };
