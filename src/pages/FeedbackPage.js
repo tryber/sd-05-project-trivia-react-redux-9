@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Header from '../components/Header';
 import { connect } from 'react-redux';
+import Header from '../components/Header';
 
 class FeedBack extends React.Component {
   render() {
