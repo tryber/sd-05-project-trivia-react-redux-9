@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import '../App.css';
 import questions from '../mock_data/questions';
@@ -28,13 +27,13 @@ class Answers extends Component {
   updateScore(id) {
     const { score } = this.state;
     const { changeScore } = this.props;
+    const valor = 10 + (((questions.results[id].difficulty === 'hard') ? 3
+    : (questions.results[id].difficulty === 'medium') ? 2
+      : 1) * 30);
     this.setState({
-      score: score
-      + 10 + ((questions.results[id].difficulty === 'hard') ? 3
-        : (questions.results[id].difficulty === 'medium') ? 2
-          : 1) * 30,
+      score: score + valor,
     });
-    changeScore(score);
+    changeScore(valor);
   }
 
   answerButtons() {

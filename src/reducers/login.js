@@ -25,7 +25,7 @@ const loginReducer = (state = INITIAL_STATE, action) => {
           ...state.ranking,
           player: {
             ...state.ranking.player,
-            score: action.score,
+            score: action.score + state.ranking.player.score,
           },
         },
       };

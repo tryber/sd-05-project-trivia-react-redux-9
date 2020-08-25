@@ -22,10 +22,6 @@ class RankingPage extends Component {
               <td data-testid="player-name-1">Camila</td>
               <td data-testid="player-score-1">45 pontos</td>
             </tr>
-            <tr>
-              <td data-testid="player-name-2">Jorge</td>
-              <td data-testid="player-score-2">40 pontos</td>
-            </tr>
           </tbody>
         </table>
       </div>

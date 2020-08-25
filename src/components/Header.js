@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 class Header extends Component {
   render() {
     // const { name, email, hash } = this.props;
-    const { name, hash } = this.props;
+    const { name, hash, score } = this.props;
     const gravatarURL = 'https://www.gravatar.com/avatar/';
     return (
       <div>
@@ -18,7 +18,7 @@ class Header extends Component {
             {name}
           </div>
           <div data-testid="header-score">
-            {JSON.parse(localStorage.getItem('state')).player.score}
+            {`${score}`}
           </div>
         </header>
       </div>
@@ -30,6 +30,7 @@ const mapStateToProps = (state) => ({
   name: state.loginReducer.name,
   // email: state.loginReducer.email,
   hash: state.requestReducer.hash,
+  score: state.loginReducer.ranking.player.score,
 });
 
 // coloquei uma imagem genérica pra substituir onde deveria ser a imagem do GravAtar;
@@ -39,4 +40,5 @@ export default connect(mapStateToProps)(Header);
 Header.propTypes = {
   name: PropTypes.string.isRequired,
   hash: PropTypes.string.isRequired,
+  score: PropTypes.string.isRequired,
 };
