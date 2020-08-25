@@ -30,21 +30,14 @@ class Feedback extends React.Component {
       <div>
         <Header />
         <div>
-          {assertions < 3 ? (
-            <p data-testid="feedback-text">Podia ser melhor...</p>
-          ) : (
-            <p data-testid="feedback-text">Mandou bem!</p>
-          )}
+          {assertions < 3 ? (<p data-testid="feedback-text">Podia ser melhor...</p>
+          ) : (<p data-testid="feedback-text">Mandou bem!</p>)}
         </div>
         <div>
-          <p>
-            Placar Final:
-            <span data-testid="feedback-total-score">{score}</span>
-          </p>
-          <p>
-            Número de Acertos:
-            <span data-testid="feedback-total-question">{assertions}</span>
-          </p>
+          <p>Placar Final:</p>
+          <span data-testid="feedback-total-score">{score}</span>
+          <p>Número de Acertos:</p>
+          <span data-testid="feedback-total-question">{assertions}</span>
           <Link to="/">
             <button type="button" data-testid="btn-play-again">Jogar Novamente</button>
           </Link>
