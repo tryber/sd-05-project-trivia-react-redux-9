@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import '../App.css';
-// import FeedbackBtn from './FeedbackBtn';
 import questions from '../mock_data/questions';
 import {
   setCounter, getAnswer, resetColors, setScore,
