@@ -5,6 +5,25 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 
 class Feedback extends React.Component {
+  componentDidMount() {
+    const { name, score, picture } = this.props;
+    const currentPlayer = {
+      name,
+      score,
+      picture,
+    };
+    const getRank = JSON.parse(localStorage.getItem('ranking'));
+    if (getRank) {
+      localStorage.setItem('ranking', JSON.stringify(
+        [...getRank, currentPlayer],
+      ));
+    } else {
+      localStorage.setItem('ranking', JSON.stringify(
+        [currentPlayer],
+      ));
+    }
+  }
+
   render() {
     const { score, assertions } = this.props;
     return (
@@ -21,7 +40,7 @@ class Feedback extends React.Component {
           <p>
             Placar Final:
             <span data-testid="feedback-total-score">{score}</span>
-            </p>
+          </p>
           <p>
             Número de Acertos:
             <span data-testid="feedback-total-question">{assertions}</span>
@@ -41,11 +60,15 @@ class Feedback extends React.Component {
 const mapStateToProps = (state) => ({
   score: state.loginReducer.score,
   assertions: state.loginReducer.assertions,
+  name: state.loginReducer.name,
+  picture: state.loginReducer.gravatarEmail,
 });
 
 export default connect(mapStateToProps)(Feedback);
 
 Feedback.propTypes = {
-  score: PropTypes.string.isRequired,
-  assertions: PropTypes.string.isRequired,
+  assertions: PropTypes.number.isRequired,
+  score: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  picture: PropTypes.string.isRequired,
 };
