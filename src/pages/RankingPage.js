@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Reset from '../components/Reset';
 
-const ranking = JSON.parse(localStorage.getItem('ranking')).sort((a, b) => b.score - a.score);
+const ranking = JSON.parse(localStorage.getItem('ranking')) || [];
+const rankingSorted = ranking.sort((a, b) => b.score - a.score);
 
 class RankingPage extends Component {
   render() {
@@ -12,7 +13,7 @@ class RankingPage extends Component {
       <div>
         <Reset />
         <h1 data-testid="ranking-title">Ranking</h1>
-        {ranking.map((user, index) => (
+        {rankingSorted.map((user, index) => (
           <div>
             <img src={`https://www.gravatar.com/avatar/${hash}`} alt={user.name} />
             <p data-testid={`player-name-${index}`}>

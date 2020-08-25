@@ -78,13 +78,13 @@ class Answers extends Component {
         <br />
         {(counter === 5) ? <Redirect to="/feedback" />
           : buttonVisible && (
-          <button
-            type="button"
-            data-testid="btn-next"
-            onClick={() => { this.setVisible(); increaseCounter(counter); resetColorBtn(); }}
-          >
-            Próxima
-          </button>
+            <button
+              type="button"
+              data-testid="btn-next"
+              onClick={() => { this.setVisible(); increaseCounter(counter); resetColorBtn(); }}
+            >
+              Próxima
+            </button>
           )}
       </div>
     );

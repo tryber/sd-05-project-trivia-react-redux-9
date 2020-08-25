@@ -2,6 +2,7 @@ import {
   SET_TOKEN,
   SET_HASH,
   SET_COUNTER,
+  RESET_COUNTER,
 } from '../actions';
 
 const INITIAL_STATE = {
@@ -28,6 +29,11 @@ function requestReducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         counter: action.counter + 1,
+      };
+    case RESET_COUNTER:
+      return {
+        ...state,
+        counter: 0,
       };
     default:
       return state;

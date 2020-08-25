@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
+import { resetCounter } from '../actions';
 
 class Feedback extends React.Component {
   componentDidMount() {
@@ -25,7 +26,7 @@ class Feedback extends React.Component {
   }
 
   render() {
-    const { score, assertions } = this.props;
+    const { score, assertions, zerarContador } = this.props;
     return (
       <div>
         <Header />
@@ -39,7 +40,7 @@ class Feedback extends React.Component {
           <p>Número de Acertos:</p>
           <span data-testid="feedback-total-question">{assertions}</span>
           <Link to="/">
-            <button type="button" data-testid="btn-play-again">Jogar Novamente</button>
+            <button type="button" data-testid="btn-play-again" onClick={() => zerarContador()}>Jogar Novamente</button>
           </Link>
           <Link to="/ranking">
             <button type="button" data-testid="btn-ranking">Ver Ranking</button>
@@ -57,11 +58,16 @@ const mapStateToProps = (state) => ({
   picture: state.loginReducer.gravatarEmail,
 });
 
-export default connect(mapStateToProps)(Feedback);
+const mapDispatchToProps = (dispatch) => ({
+  zerarContador: () => dispatch(resetCounter()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Feedback);
 
 Feedback.propTypes = {
   assertions: PropTypes.number.isRequired,
   score: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   picture: PropTypes.string.isRequired,
+  zerarContador: PropTypes.func.isRequired,
 };
