@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import CryptoJs from 'crypto-js';
 import Card from '../layouts/Card';
-
 import { requestAPI, requestQuestions } from '../services';
 import {
   setStatus, setToken, setHash, randomIndex,

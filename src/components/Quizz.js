@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// import questions from '../mock_data/questions';
 
 class Quizz extends Component {
   render() {
