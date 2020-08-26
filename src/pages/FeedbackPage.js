@@ -13,8 +13,8 @@ class FeedBack extends React.Component {
         <Header />
         <div>
           {assertions < 3
-            ? <p data-testid="feedback-text">Podia ser melhor...</p>
-            : <p data-testid="feedback-text">Mandou bem!</p>}
+            ? <p data-testid="feedback-text" style={{ color: 'red' }}>Podia ser melhor...</p>
+            : <p data-testid="feedback-text" style={{ color: 'blue' }}>Mandou bem!</p>}
         </div>
         <div>
           <p>

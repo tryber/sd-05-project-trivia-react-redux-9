@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import CryptoJs from 'crypto-js';
 import Card from '../layouts/Card';
-import { requestAPI } from '../services';
+import { requestAPI, requestQuestions } from '../services';
 import {
   setStatus, setToken, setHash, randomIndex,
+  getQuestions,
 } from '../actions';
 import RankingBtn from '../components/RankingBtn';
 
@@ -22,6 +23,13 @@ class HomePage extends Component {
     this.getEmail = this.getEmail.bind(this);
     this.getName = this.getName.bind(this);
     this.durstenfeld = this.durstenfeld.bind(this);
+  }
+
+  componentDidMount() {
+    const { setQuizz } = this.props;
+    const token = localStorage.getItem('token');
+    requestQuestions(token)
+      .then((data) => setQuizz(data));
   }
 
   getEmail() {
@@ -127,6 +135,8 @@ const mapDispatchToProps = (dispatch) => ({
   requestToken: (value) => dispatch(setToken(value.token)),
   hashGravatar: (hash) => dispatch(setHash(hash)),
   durstenfeldShuffle: (shuffle) => dispatch(randomIndex(shuffle)),
+
+  setQuizz: (data) => dispatch(getQuestions(data)),
 });
 
 export default connect(null, mapDispatchToProps)(HomePage);

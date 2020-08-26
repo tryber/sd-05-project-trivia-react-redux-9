@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import questions from '../mock_data/questions';
+// import questions from '../mock_data/questions';
 import {
   setCounter, getAnswer, resetColors, setScore,
 } from '../actions';
@@ -23,7 +23,6 @@ class Answers extends Component {
     this.setVisible = this.setVisible.bind(this);
     this.answerButtons = this.answerButtons.bind(this);
     this.updateScore = this.updateScore.bind(this);
-    // this.randomBtn = this.randomBtn.bind(this);
   }
 
   setVisible() {
@@ -33,8 +32,9 @@ class Answers extends Component {
 
   updateScore(id) {
     const { score } = this.state;
-    const { changeScore } = this.props;
-    const valor = 10 + (difLevels[questions.results[id].difficulty] * 20);
+    const { changeScore, gameData } = this.props;
+    const aux = gameData;
+    const valor = 10 + (difLevels[aux.gameData[id].difficulty] * 20);
     this.setState({
       score: score + valor,
     });
@@ -43,8 +43,9 @@ class Answers extends Component {
 
   correctButton() {
     const {
-      counter, correctanswer, setCollors, shuffle,
+      counter, correctanswer, setCollors, shuffle, gameData,
     } = this.props;
+    const aux = gameData;
     return (
       <span>
         <button
@@ -57,7 +58,7 @@ class Answers extends Component {
             setCollors();
           }}
         >
-          {questions.results[shuffle[counter]].correct_answer}
+          {aux.gameData[shuffle[counter]].correct_answer}
         </button>
       </span>
     );
@@ -65,11 +66,12 @@ class Answers extends Component {
 
   wrongButtons() {
     const {
-      counter, wronganswer, setCollors, shuffle,
+      counter, wronganswer, setCollors, shuffle, gameData,
     } = this.props;
+    const aux = gameData;
     return (
       <span>
-        {questions.results[shuffle[counter]].incorrect_answers.map((wrong) => (
+        {aux.gameData[shuffle[counter]].incorrect_answers.map((wrong) => (
           <button
             type="button"
             className={wronganswer}
@@ -122,6 +124,7 @@ const mapStateToProps = (state) => ({
   correctanswer: state.questionsReducer.correct,
   wronganswer: state.questionsReducer.wrong,
   shuffle: state.questionsReducer.shuffle,
+  gameData: state.questionsReducer,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -142,4 +145,5 @@ Answers.propTypes = {
   resetColorBtn: PropTypes.func.isRequired,
   changeScore: PropTypes.func.isRequired,
   shuffle: PropTypes.arrayOf(PropTypes.number).isRequired,
+  gameData: PropTypes.objectOf(PropTypes.object).isRequired,
 };
