@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import CryptoJs from 'crypto-js';
 import Card from '../layouts/Card';
+
 import { requestAPI, requestQuestions } from '../services';
 import {
   setStatus, setToken, setHash, randomIndex,
   getQuestions,
 } from '../actions';
 import RankingBtn from '../components/RankingBtn';
+import logo from '../trivia.png';
 
 class HomePage extends Component {
   constructor(props) {
@@ -22,6 +24,8 @@ class HomePage extends Component {
     this.getEmail = this.getEmail.bind(this);
     this.getName = this.getName.bind(this);
     this.durstenfeld = this.durstenfeld.bind(this);
+    this.buttonPlay = this.buttonPlay.bind(this);
+    this.buttonSettings = this.buttonSettings.bind(this);
   }
 
   componentDidMount() {
@@ -99,30 +103,48 @@ class HomePage extends Component {
     this.getGravatar();
   }
 
-  render() {
+  buttonPlay() {
     const { durstenfeldShuffle } = this.props;
     const aux = [0, 1, 2, 3, 4];
     return (
+      <Link to="/game">
+        <button
+          data-testid="btn-play"
+          disabled={this.checkLogin()}
+          onClick={() => { durstenfeldShuffle(this.durstenfeld(aux)); this.clickPlayButton(); }}
+          type="button"
+        >
+          Jogar
+        </button>
+      </Link>
+    );
+  }
+
+  buttonSettings() {
+    return (
+      <Link to="/settings">
+        <button data-testid="btn-settings" type="button"> Configurações </button>
+      </Link>
+    );
+  }
+
+  render() {
+    return (
       <Card>
         <form>
-          {this.getEmail()}
-          <br />
-          {this.getName()}
-          <br />
-          <Link to="/game">
-            <button
-              data-testid="btn-play"
-              disabled={this.checkLogin()}
-              onClick={() => { durstenfeldShuffle(this.durstenfeld(aux)); this.clickPlayButton(); }}
-              type="button"
-            >
-              Jogar
-            </button>
-          </Link>
-          <Link to="/settings">
-            <button data-testid="btn-settings" type="button"> Configurações </button>
-          </Link>
-          <RankingBtn />
+          <div>
+            <img src={logo} alt="trivia" style={{ width: '320px' }} />
+          </div>
+          <div className="Conteudo">
+            {this.getEmail()}
+            <br />
+            {this.getName()}
+          </div>
+          <div>
+            {this.buttonPlay()}
+            {this.buttonSettings()}
+            <RankingBtn />
+          </div>
         </form>
       </Card>
     );

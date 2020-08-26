@@ -5,9 +5,11 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  margin: 20px;
+  height: 500px;
+  margin: auto;
   min-width: 300px;
-  overflow: hidden;
+  overflow: hidden;  
+  width: 600px
 }
 
 .Card .Conteudo {

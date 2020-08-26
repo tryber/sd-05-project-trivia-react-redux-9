@@ -13,7 +13,7 @@ class Quizz extends Component {
       (counter < 5) ? (
         <div>
           <p data-testid="question-category">
-            <strong>Category:</strong>
+            <strong>Category: </strong>
             {aux.gameData[shuffle[counter]].category}
           </p>
           <p data-testid="question-text">
