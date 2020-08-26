@@ -10,8 +10,10 @@ class RankingPage extends Component {
         <h1 data-testid="ranking-title">Ranking</h1>
         <table>
           <thead>
-            <th>Jogador</th>
-            <th>Pontuação</th>
+            <tr>
+              <th>Jogador</th>
+              <th>Pontuação</th>
+            </tr>
           </thead>
           <tbody>
             <tr>

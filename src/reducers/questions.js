@@ -6,7 +6,7 @@ const INITIAL_STATE = {
   gameData: [],
   correct: '',
   wrong: '',
-  shuffle: 0,
+  shuffle: [],
 };
 
 function questionsReducer(state = INITIAL_STATE, action) {

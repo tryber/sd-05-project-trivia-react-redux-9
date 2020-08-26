@@ -24,6 +24,7 @@ class Answers extends Component {
     this.setVisible = this.setVisible.bind(this);
     this.answerButtons = this.answerButtons.bind(this);
     this.updateScore = this.updateScore.bind(this);
+    this.randomBtn = this.randomBtn.bind(this);
   }
 
   setVisible() {
@@ -41,9 +42,9 @@ class Answers extends Component {
     changeScore(valor);
   }
 
-  answerButtons() {
+  correctButton() {
     const {
-      counter, correctanswer, wronganswer, setCorrectAnswer, shuffle,
+      counter, correctanswer, setCollors, shuffle,
     } = this.props;
     return (
       <div>
@@ -51,22 +52,76 @@ class Answers extends Component {
           type="button"
           className={correctanswer}
           data-testid="correct-answer"
-          onClick={() => { this.setVisible(); setCorrectAnswer(); this.updateScore(counter); }}
+          onClick={() => {
+            this.setVisible();
+            this.updateScore(counter);
+            setCollors();
+          }}
         >
-          {questions.results[shuffle].correct_answer}
+          {questions.results[shuffle[counter]].correct_answer}
         </button>
-        {questions.results[shuffle].incorrect_answers.map((wrong) => (
+      </div>
+    );
+  }
+
+  wrongButtons() {
+    const {
+      counter, wronganswer, setCollors, shuffle,
+    } = this.props;
+    return (
+      <div>
+        {questions.results[shuffle[counter]].incorrect_answers.map((wrong) => (
           <button
             type="button"
             className={wronganswer}
             data-testid={`wrong-answer-${wrong}`}
             key={wrong}
-            onClick={() => { this.setVisible(); setCorrectAnswer(); }}
+            onClick={() => { this.setVisible(); setCollors(); }}
           >
             {wrong}
           </button>
         ))}
       </div>
+    );
+  }
+
+  randomBtn() {
+    const array = [this.correctButton(), this.wrongButtons()];
+    array.sort(() => Math.random() - 0.5);
+    return array;
+  }
+
+  answerButtons() {
+    // const {
+    //   counter, correctanswer, wronganswer, setCorrectAnswer, shuffle,
+    // } = this.props;
+    return (
+      <div>
+        {this.randomBtn()}
+        {/* {this.correctButton()}
+        {this.wrongButtons()} */}
+      </div>
+      // <div>
+      //   <button
+      //     type="button"
+      //     className={correctanswer}
+      //     data-testid="correct-answer"
+      //     onClick={() => { this.setVisible(); setCorrectAnswer(); this.updateScore(counter); }}
+      //   >
+      //     {questions.results[shuffle[counter]].correct_answer}
+      //   </button>
+      //   {questions.results[shuffle[counter]].incorrect_answers.map((wrong) => (
+      //     <button
+      //       type="button"
+      //       className={wronganswer}
+      //       data-testid={`wrong-answer-${wrong}`}
+      //       key={wrong}
+      //       onClick={() => { this.setVisible(); setCorrectAnswer(); }}
+      //     >
+      //       {wrong}
+      //     </button>
+      //   ))}
+      // </div>
     );
   }
 
@@ -102,7 +157,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   increaseCounter: (counter) => dispatch(setCounter(counter)),
-  setCorrectAnswer: () => dispatch(getAnswer('correct', 'wrong')),
+  setCollors: () => dispatch(getAnswer('correct', 'wrong')),
   resetColorBtn: () => dispatch(resetColors()),
   changeScore: (score) => dispatch(setScore(score)),
 });
@@ -114,8 +169,8 @@ Answers.propTypes = {
   counter: PropTypes.number.isRequired,
   correctanswer: PropTypes.string.isRequired,
   wronganswer: PropTypes.string.isRequired,
-  setCorrectAnswer: PropTypes.func.isRequired,
+  setCollors: PropTypes.func.isRequired,
   resetColorBtn: PropTypes.func.isRequired,
   changeScore: PropTypes.func.isRequired,
-  shuffle: PropTypes.number.isRequired,
+  shuffle: PropTypes.arrayOf(PropTypes.number).isRequired,
 };

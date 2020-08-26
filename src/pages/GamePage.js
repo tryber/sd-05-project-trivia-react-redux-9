@@ -5,7 +5,6 @@ import Header from '../components/Header';
 import Quizz from '../components/Quizz';
 import Answers from '../components/Answers';
 import Reset from '../components/Reset';
-// import questions from '../mock_data/questions';
 import { requestQuestions } from '../services';
 import { getQuestions } from '../actions';
 import RankingBtn from '../components/RankingBtn';

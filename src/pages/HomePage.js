@@ -5,7 +5,9 @@ import PropTypes from 'prop-types';
 import CryptoJs from 'crypto-js';
 import '../App.css';
 import { requestAPI } from '../services';
-import { setStatus, setToken, setHash } from '../actions';
+import {
+  setStatus, setToken, setHash, randomIndex,
+} from '../actions';
 import RankingBtn from '../components/RankingBtn';
 
 class HomePage extends Component {
@@ -14,10 +16,12 @@ class HomePage extends Component {
     this.state = {
       name: '',
       email: '',
+      // QuizzId: [],
     };
     this.checkLogin = this.checkLogin.bind(this);
     this.getEmail = this.getEmail.bind(this);
     this.getName = this.getName.bind(this);
+    this.durstenfeld = this.durstenfeld.bind(this);
   }
 
   getEmail() {
@@ -64,6 +68,17 @@ class HomePage extends Component {
     return !(email && name);
   }
 
+  /* Randomize array in-place using Durstenfeld shuffle algorithm  https://bit.ly/2EBiyEC */
+  durstenfeld(array) {
+    const aux = array; // https://bit.ly/3jdBxEn
+    for (let i = aux.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [aux[i], aux[j]] = [aux[j], aux[i]];
+    }
+    console.log(this.aux);
+    return aux;
+  }
+
   // função que é chamada ao clicar o botão "jogar"
   clickPlayButton() {
     const { requestToken, setLogin } = this.props;
@@ -78,6 +93,8 @@ class HomePage extends Component {
   }
 
   render() {
+    const { durstenfeldShuffle } = this.props;
+    const aux = [0, 1, 2, 3, 4];
     return (
       <div className="wrapper">
         <form>
@@ -89,7 +106,7 @@ class HomePage extends Component {
             <button
               data-testid="btn-play"
               disabled={this.checkLogin()}
-              onClick={() => this.clickPlayButton()}
+              onClick={() => { durstenfeldShuffle(this.durstenfeld(aux)); this.clickPlayButton(); }}
               type="button"
             >
               Jogar
@@ -109,6 +126,7 @@ const mapDispatchToProps = (dispatch) => ({
   setLogin: (email, name) => dispatch(setStatus(email, name)),
   requestToken: (value) => dispatch(setToken(value.token)),
   hashGravatar: (hash) => dispatch(setHash(hash)),
+  durstenfeldShuffle: (shuffle) => dispatch(randomIndex(shuffle)),
 });
 
 export default connect(null, mapDispatchToProps)(HomePage);
@@ -117,4 +135,5 @@ HomePage.propTypes = {
   setLogin: PropTypes.func.isRequired,
   requestToken: PropTypes.func.isRequired,
   hashGravatar: PropTypes.func.isRequired,
+  durstenfeldShuffle: PropTypes.func.isRequired,
 };
