@@ -18,11 +18,11 @@ class FeedBack extends React.Component {
         </div>
         <div>
           <p>
-            <strong>Placar Final:</strong>
+            <strong>Placar Final: </strong>
             <span data-testid="feedback-total-score">{score}</span>
           </p>
           <p>
-            <strong>Número de Acertos:</strong>
+            <strong>Número de Acertos: </strong>
             <span data-testid="feedback-total-question">{assertions}</span>
           </p>
         </div>

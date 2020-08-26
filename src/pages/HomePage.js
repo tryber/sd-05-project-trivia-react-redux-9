@@ -17,7 +17,6 @@ class HomePage extends Component {
     this.state = {
       name: '',
       email: '',
-      // QuizzId: [],
     };
     this.checkLogin = this.checkLogin.bind(this);
     this.getEmail = this.getEmail.bind(this);
@@ -135,7 +134,6 @@ const mapDispatchToProps = (dispatch) => ({
   requestToken: (value) => dispatch(setToken(value.token)),
   hashGravatar: (hash) => dispatch(setHash(hash)),
   durstenfeldShuffle: (shuffle) => dispatch(randomIndex(shuffle)),
-
   setQuizz: (data) => dispatch(getQuestions(data)),
 });
 
@@ -146,4 +144,5 @@ HomePage.propTypes = {
   requestToken: PropTypes.func.isRequired,
   hashGravatar: PropTypes.func.isRequired,
   durstenfeldShuffle: PropTypes.func.isRequired,
+  setQuizz: PropTypes.func.isRequired,
 };
