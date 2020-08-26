@@ -5,7 +5,7 @@ import GamePage from './pages/GamePage';
 import SettingsPage from './pages/SettingsPage';
 import RankingPage from './pages/RankingPage';
 import FeedbackPage from './pages/FeedbackPage';
-
+import './App.css';
 // import logo from './trivia.png';
 
 class App extends Component {

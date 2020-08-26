@@ -2,13 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Card from '../layouts/Card';
 import Header from '../components/Header';
 
 class FeedBack extends React.Component {
   render() {
     const { score, assertions } = this.props;
     return (
-      <div>
+      <Card>
         <Header />
         <div>
           {assertions < 3
@@ -17,11 +18,11 @@ class FeedBack extends React.Component {
         </div>
         <div>
           <p>
-            Placar Final:
+            <strong>Placar Final:</strong>
             <span data-testid="feedback-total-score">{score}</span>
           </p>
           <p>
-            Número de Acertos:
+            <strong>Número de Acertos:</strong>
             <span data-testid="feedback-total-question">{assertions}</span>
           </p>
         </div>
@@ -33,7 +34,7 @@ class FeedBack extends React.Component {
             <button type="button" data-testid="btn-ranking">Ver Ranking</button>
           </Link>
         </div>
-      </div>
+      </Card>
     );
   }
 }

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import CryptoJs from 'crypto-js';
-import '../App.css';
+import Card from '../layouts/Card';
 import { requestAPI } from '../services';
 import {
   setStatus, setToken, setHash, randomIndex,
@@ -96,7 +96,7 @@ class HomePage extends Component {
     const { durstenfeldShuffle } = this.props;
     const aux = [0, 1, 2, 3, 4];
     return (
-      <div className="wrapper">
+      <Card>
         <form>
           {this.getEmail()}
           <br />
@@ -117,7 +117,7 @@ class HomePage extends Component {
           </Link>
           <RankingBtn />
         </form>
-      </div>
+      </Card>
     );
   }
 }

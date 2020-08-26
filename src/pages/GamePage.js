@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import Quizz from '../components/Quizz';
 import Answers from '../components/Answers';
 import Reset from '../components/Reset';
+import Card from '../layouts/Card';
 import { requestQuestions } from '../services';
 import { getQuestions } from '../actions';
 import RankingBtn from '../components/RankingBtn';
@@ -19,13 +20,13 @@ class GamePage extends Component {
 
   render() {
     return (
-      <div>
-        <Reset />
+      <Card>
         <Header />
         <Quizz />
         <Answers />
         <RankingBtn />
-      </div>
+        <Reset />
+      </Card>
     );
   }
 }

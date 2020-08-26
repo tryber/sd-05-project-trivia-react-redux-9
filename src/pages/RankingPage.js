@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
+import Card from '../layouts/Card';
 import Reset from '../components/Reset';
 
 class RankingPage extends Component {
   render() {
     return (
-      <div>
-        <Reset />
+      <Card>
         <h1 data-testid="ranking-title">Ranking</h1>
         <table>
           <thead>
@@ -26,7 +25,8 @@ class RankingPage extends Component {
             </tr>
           </tbody>
         </table>
-      </div>
+        <Reset />
+      </Card>
     );
   }
 }
