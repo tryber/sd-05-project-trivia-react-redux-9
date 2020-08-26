@@ -25,7 +25,6 @@ class HomePage extends Component {
     this.getName = this.getName.bind(this);
     this.durstenfeld = this.durstenfeld.bind(this);
     this.buttonPlay = this.buttonPlay.bind(this);
-    this.buttonSettings = this.buttonSettings.bind(this);
   }
 
   componentDidMount() {
@@ -120,14 +119,6 @@ class HomePage extends Component {
     );
   }
 
-  buttonSettings() {
-    return (
-      <Link to="/settings">
-        <button data-testid="btn-settings" type="button"> Configurações </button>
-      </Link>
-    );
-  }
-
   render() {
     return (
       <Card>
@@ -142,7 +133,9 @@ class HomePage extends Component {
           </div>
           <div>
             {this.buttonPlay()}
-            {this.buttonSettings()}
+            <Link to="/settings">
+              <button data-testid="btn-settings" type="button"> Configurações </button>
+            </Link>
             <RankingBtn />
           </div>
         </form>
