@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import '../App.css';
 import questions from '../mock_data/questions';
 import {
   setCounter, getAnswer, resetColors, setScore,
@@ -24,7 +23,7 @@ class Answers extends Component {
     this.setVisible = this.setVisible.bind(this);
     this.answerButtons = this.answerButtons.bind(this);
     this.updateScore = this.updateScore.bind(this);
-    this.randomBtn = this.randomBtn.bind(this);
+    // this.randomBtn = this.randomBtn.bind(this);
   }
 
   setVisible() {
@@ -47,7 +46,7 @@ class Answers extends Component {
       counter, correctanswer, setCollors, shuffle,
     } = this.props;
     return (
-      <div>
+      <span>
         <button
           type="button"
           className={correctanswer}
@@ -60,7 +59,7 @@ class Answers extends Component {
         >
           {questions.results[shuffle[counter]].correct_answer}
         </button>
-      </div>
+      </span>
     );
   }
 
@@ -69,7 +68,7 @@ class Answers extends Component {
       counter, wronganswer, setCollors, shuffle,
     } = this.props;
     return (
-      <div>
+      <span>
         {questions.results[shuffle[counter]].incorrect_answers.map((wrong) => (
           <button
             type="button"
@@ -81,48 +80,18 @@ class Answers extends Component {
             {wrong}
           </button>
         ))}
-      </div>
+      </span>
     );
-  }
-
-  randomBtn() {
-    const array = [this.correctButton(), this.wrongButtons()];
-    array.sort(() => Math.random() - 0.5);
-    return array;
   }
 
   answerButtons() {
-    // const {
-    //   counter, correctanswer, wronganswer, setCorrectAnswer, shuffle,
-    // } = this.props;
-    return (
-      <div>
-        {this.randomBtn()}
-        {/* {this.correctButton()}
-        {this.wrongButtons()} */}
-      </div>
-      // <div>
-      //   <button
-      //     type="button"
-      //     className={correctanswer}
-      //     data-testid="correct-answer"
-      //     onClick={() => { this.setVisible(); setCorrectAnswer(); this.updateScore(counter); }}
-      //   >
-      //     {questions.results[shuffle[counter]].correct_answer}
-      //   </button>
-      //   {questions.results[shuffle[counter]].incorrect_answers.map((wrong) => (
-      //     <button
-      //       type="button"
-      //       className={wronganswer}
-      //       data-testid={`wrong-answer-${wrong}`}
-      //       key={wrong}
-      //       onClick={() => { this.setVisible(); setCorrectAnswer(); }}
-      //     >
-      //       {wrong}
-      //     </button>
-      //   ))}
-      // </div>
-    );
+    const aux = [this.correctButton(), this.wrongButtons()];
+    console.log(aux);
+    for (let i = aux.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [aux[i], aux[j]] = [aux[j], aux[i]];
+    }
+    return aux;
   }
 
   render() {
