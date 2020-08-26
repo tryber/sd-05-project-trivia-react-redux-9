@@ -9,9 +9,7 @@ class FeedBack extends React.Component {
     const { score, assertions } = this.props;
     return (
       <div>
-        <div>
-          <Header />
-        </div>
+        <Header />
         <div>
           {assertions < 3
             ? <p data-testid="feedback-text">Podia ser melhor...</p>
