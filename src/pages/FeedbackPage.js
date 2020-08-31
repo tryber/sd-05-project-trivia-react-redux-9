@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import { resetCounter } from '../actions';
 import RankingBtn from '../components/RankingBtn';
+import Card from '../layouts/Card';
 
 class Feedback extends React.Component {
   componentDidMount() {
@@ -30,27 +31,30 @@ class Feedback extends React.Component {
     const { score, assertions, zerarContador } = this.props;
     return (
       <div>
-        <Header />
-        {assertions < 3
-          ? <p data-testid="feedback-text" style={{ color: 'red' }}>Podia ser melhor...</p>
-          : <p data-testid="feedback-text" style={{ color: 'blue' }}>Mandou bem!</p>}
-        <p>
-          <strong>Placar Final: </strong>
+        <Card>
+          <Header />
+          {assertions < 3
+            ? <p data-testid="feedback-text" style={{ color: 'red' }}>Podia ser melhor...</p>
+            : <p data-testid="feedback-text" style={{ color: 'blue' }}>Mandou bem!</p>}
+          <p>
+            <strong>Placar Final: </strong>
+            <span data-testid="feedback-total-score">{score}</span>
+          </p>
+          <p>
+            <strong>Número de Acertos: </strong>
+            <span data-testid="feedback-total-question">{assertions}</span>
+          </p>
+          <p>Placar Final:</p>
           <span data-testid="feedback-total-score">{score}</span>
-        </p>
-        <p>
-          <strong>Número de Acertos: </strong>
+          <p>Número de Acertos:</p>
           <span data-testid="feedback-total-question">{assertions}</span>
-        </p>
-        <p>Placar Final:</p>
-        <span data-testid="feedback-total-score">{score}</span>
-        <p>Número de Acertos:</p>
-        <span data-testid="feedback-total-question">{assertions}</span>
-        <Link to="/">
-          <button type="button" data-testid="btn-play-again"
-            onClick={() => zerarContador()}>Jogar Novamente</button>
-        </Link>
-        <RankingBtn />
+          <Link to="/">
+            <button type="button" data-testid="btn-play-again" onClick={() => zerarContador()}>
+              Jogar Novamente
+            </button>
+          </Link>
+          <RankingBtn />
+        </Card>
       </div>
     );
   }
