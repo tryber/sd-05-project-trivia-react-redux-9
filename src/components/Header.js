@@ -14,14 +14,12 @@ class Header extends Component {
             <img src={`${gravatarURL}${hash}`} alt={`${name}`} />
           </div>
           <div>
-            <div data-testid="header-player-name">
-              <strong>Jogador: </strong>
-              {name}
-            </div>
-            <div data-testid="header-score">
-              <strong>Pontos: </strong>
-              {`${score}`}
-            </div>
+            <strong>Jogador: </strong>
+            <span data-testid="header-player-name">{name}</span>
+          </div>
+          <div>
+            <strong>Pontos: </strong>
+            <span data-testid="header-score">{`${score}`}</span>
           </div>
         </header>
       </div>
