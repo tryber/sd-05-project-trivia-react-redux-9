@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import { resetCounter } from '../actions';
+import RankingBtn from '../components/RankingBtn';
 
 class Feedback extends React.Component {
   componentDidMount() {
@@ -28,36 +29,29 @@ class Feedback extends React.Component {
   render() {
     const { score, assertions, zerarContador } = this.props;
     return (
-      <Card>
+      <div>
         <Header />
-        <div>
-          {assertions < 3
-            ? <p data-testid="feedback-text" style={{ color: 'red' }}>Podia ser melhor...</p>
-            : <p data-testid="feedback-text" style={{ color: 'blue' }}>Mandou bem!</p>}
-        </div>
-        <div>
-          <p>
-            <strong>Placar Final: </strong>
-            <span data-testid="feedback-total-score">{score}</span>
-          </p>
-          <p>
-            <strong>Número de Acertos: </strong>
-            <span data-testid="feedback-total-question">{assertions}</span>
-          </p>
-        </div>
-        <div>
-          <p>Placar Final:</p>
+        {assertions < 3
+          ? <p data-testid="feedback-text" style={{ color: 'red' }}>Podia ser melhor...</p>
+          : <p data-testid="feedback-text" style={{ color: 'blue' }}>Mandou bem!</p>}
+        <p>
+          <strong>Placar Final: </strong>
           <span data-testid="feedback-total-score">{score}</span>
-          <p>Número de Acertos:</p>
+        </p>
+        <p>
+          <strong>Número de Acertos: </strong>
           <span data-testid="feedback-total-question">{assertions}</span>
-          <Link to="/">
-            <button type="button" data-testid="btn-play-again" onClick={() => zerarContador()}>Jogar Novamente</button>
-          </Link>
-          <Link to="/ranking">
-            <button type="button" data-testid="btn-ranking">Ver Ranking</button>
-          </Link>
-        </div>
-      </Card>
+        </p>
+        <p>Placar Final:</p>
+        <span data-testid="feedback-total-score">{score}</span>
+        <p>Número de Acertos:</p>
+        <span data-testid="feedback-total-question">{assertions}</span>
+        <Link to="/">
+          <button type="button" data-testid="btn-play-again"
+            onClick={() => zerarContador()}>Jogar Novamente</button>
+        </Link>
+        <RankingBtn />
+      </div>
     );
   }
 }

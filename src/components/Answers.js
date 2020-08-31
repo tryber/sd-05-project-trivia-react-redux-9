@@ -77,7 +77,7 @@ class Answers extends Component {
     return (
       <span>
         {/* {aux.gameData[shuffle[counter]].incorrect_answers.map((wrong) => ( */}
-        {questions.results[shuffle[counter]].incorrect_answers.map((wrong) => (
+        {questions.results[shuffle[counter]].incorrect_answers.map((wrong, index) => (
           <button
             type="button"
             className={wronganswer}
