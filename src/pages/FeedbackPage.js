@@ -2,25 +2,29 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Card from '../layouts/Card';
 import Header from '../components/Header';
 
 class FeedBack extends React.Component {
   render() {
     const { score, assertions } = this.props;
     return (
-      <div>
+      <Card>
+        <Header />
         <div>
-          <Header />
+          {assertions < 3
+            ? <p data-testid="feedback-text" style={{ color: 'red' }}>Podia ser melhor...</p>
+            : <p data-testid="feedback-text" style={{ color: 'blue' }}>Mandou bem!</p>}
         </div>
         <div>
-          {/* if (correctAnswer < 3) */}
-          <p data-testid="feedback-text">Podia ser melhor...</p>
-          {/* else */}
-          <p data-testid="feedback-text">Mandou bem!</p>
-        </div>
-        <div>
-          <p>Placar Final:<span data-testid="feedback-total-score">{score}</span></p>
-          <p>Número de Acertos: <span data-testid="feedback-total-question">{assertions}</span></p>
+          <p>
+            <strong>Placar Final: </strong>
+            <span data-testid="feedback-total-score">{score}</span>
+          </p>
+          <p>
+            <strong>Número de Acertos: </strong>
+            <span data-testid="feedback-total-question">{assertions}</span>
+          </p>
         </div>
         <div>
           <Link to="/">
@@ -30,7 +34,7 @@ class FeedBack extends React.Component {
             <button type="button" data-testid="btn-ranking">Ver Ranking</button>
           </Link>
         </div>
-      </div>
+      </Card>
     );
   }
 }
@@ -43,6 +47,6 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps)(FeedBack);
 
 FeedBack.propTypes = {
-  score: PropTypes.string.isRequired,
-  assertions: PropTypes.string.isRequired,
+  score: PropTypes.number.isRequired,
+  assertions: PropTypes.number.isRequired,
 };

@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import Reset from '../components/Reset';
+import Card from '../layouts/Card';
 
 class SettingsPage extends Component {
   render() {
     return (
-      <div>
-        <Reset />
+      <Card>
         <h1 data-testid="settings-title">
           «Configurações»
         </h1>
-      </div>
+        <Reset />
+      </Card>
     );
   }
 }

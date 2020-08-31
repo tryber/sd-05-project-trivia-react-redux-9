@@ -6,8 +6,6 @@ import SettingsPage from './pages/SettingsPage';
 import RankingPage from './pages/RankingPage';
 import FeedbackPage from './pages/FeedbackPage';
 
-// import logo from './trivia.png';
-
 class App extends Component {
   render() {
     return (

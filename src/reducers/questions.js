@@ -1,9 +1,12 @@
-import { GET_QUESTIONS, GET_ANSWER, RESET_COLORS } from '../actions';
+import {
+  GET_QUESTIONS, GET_ANSWER, RESET_COLORS, RDM_INDEX,
+} from '../actions';
 
 const INITIAL_STATE = {
   gameData: [],
   correct: '',
   wrong: '',
+  shuffle: [],
 };
 
 function questionsReducer(state = INITIAL_STATE, action) {
@@ -24,6 +27,11 @@ function questionsReducer(state = INITIAL_STATE, action) {
         ...state,
         correct: '',
         wrong: '',
+      };
+    case RDM_INDEX:
+      return {
+        ...state,
+        shuffle: action.shuffle,
       };
     default:
       return state;
