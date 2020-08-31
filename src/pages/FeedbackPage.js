@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -37,12 +38,10 @@ class Feedback extends React.Component {
             ? <p data-testid="feedback-text" style={{ color: 'red' }}>Podia ser melhor...</p>
             : <p data-testid="feedback-text" style={{ color: 'blue' }}>Mandou bem!</p>}
           <div>
-            <p>
-              <strong>Placar Final: </strong>
+            <p><strong>Placar Final: </strong>
               <span data-testid="feedback-total-score">{score}</span>
             </p>
-            <p>
-              <strong>Número de Acertos: </strong>
+            <p><strong>Número de Acertos: </strong>
               <span data-testid="feedback-total-question">{assertions}</span>
             </p>
             <p>Placar Final:</p>
