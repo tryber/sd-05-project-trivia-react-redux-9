@@ -5,10 +5,11 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import CryptoJs from 'crypto-js';
 import Card from '../layouts/Card';
-import { requestAPI, requestQuestions } from '../services';
+import { requestAPI } from '../services';
+// import { requestAPI, requestQuestions } from '../services';
 import {
   setStatus, setToken, setHash, randomIndex,
-  getQuestions,
+  // getQuestions,
 } from '../actions';
 import RankingBtn from '../components/RankingBtn';
 import logo from '../trivia.png';
@@ -28,8 +29,8 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
-    const { setQuizz } = this.props;
-    const token = localStorage.getItem('token');
+    // const { setQuizz } = this.props;
+    // const token = localStorage.getItem('token');
     // requestQuestions(token)
     //   .then((data) => setQuizz(data));
   }
@@ -149,7 +150,7 @@ const mapDispatchToProps = (dispatch) => ({
   requestToken: (value) => dispatch(setToken(value.token)),
   hashGravatar: (hash) => dispatch(setHash(hash)),
   durstenfeldShuffle: (shuffle) => dispatch(randomIndex(shuffle)),
-  setQuizz: (data) => dispatch(getQuestions(data)),
+  // setQuizz: (data) => dispatch(getQuestions(data)),
 });
 
 export default connect(null, mapDispatchToProps)(HomePage);
@@ -159,5 +160,5 @@ HomePage.propTypes = {
   requestToken: PropTypes.func.isRequired,
   hashGravatar: PropTypes.func.isRequired,
   durstenfeldShuffle: PropTypes.func.isRequired,
-  setQuizz: PropTypes.func.isRequired,
+  // setQuizz: PropTypes.func.isRequired,
 };

@@ -5,7 +5,8 @@ import questions from '../mock_data/questions';
 
 class Quizz extends Component {
   render() {
-    const { counter, shuffle, gameData } = this.props;
+    const { counter, shuffle } = this.props;
+    // const { counter, shuffle, gameData } = this.props;
     // const aux = gameData;
     return (
       <div>
@@ -14,12 +15,12 @@ class Quizz extends Component {
         <div>
           <p data-testid="question-category">
             <strong>Category: </strong>
-            {questions.results[shuffle[counter]]?.category}
+            {questions.results[shuffle[counter]].category}
             {/* {aux.gameData[shuffle[counter]].category} */}
           </p>
           <p data-testid="question-text">
             <strong>{`Question 0${counter + 1}: `}</strong>
-            {questions.results[shuffle[counter]]?.question}
+            {questions.results[shuffle[counter]].question}
             {/* {aux.gameData[shuffle[counter]].question} */}
           </p>
         </div>
@@ -36,7 +37,7 @@ class Quizz extends Component {
 const mapStateToProps = (state) => ({
   counter: state.requestReducer.counter,
   shuffle: state.questionsReducer.shuffle,
-  gameData: state.questionsReducer,
+  // gameData: state.questionsReducer,
 });
 
 export default connect(mapStateToProps)(Quizz);
@@ -44,5 +45,5 @@ export default connect(mapStateToProps)(Quizz);
 Quizz.propTypes = {
   counter: PropTypes.number.isRequired,
   shuffle: PropTypes.arrayOf(PropTypes.number).isRequired,
-  gameData: PropTypes.objectOf(PropTypes.object).isRequired,
+  // gameData: PropTypes.objectOf(PropTypes.object).isRequired,
 };
