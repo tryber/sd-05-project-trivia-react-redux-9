@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -29,8 +30,8 @@ class HomePage extends Component {
   componentDidMount() {
     const { setQuizz } = this.props;
     const token = localStorage.getItem('token');
-    requestQuestions(token)
-      .then((data) => setQuizz(data));
+    // requestQuestions(token)
+    //   .then((data) => setQuizz(data));
   }
 
   getEmail() {
@@ -84,7 +85,7 @@ class HomePage extends Component {
       const j = Math.floor(Math.random() * (i + 1));
       [aux[i], aux[j]] = [aux[j], aux[i]];
     }
-    console.log(this.aux);
+    // console.log(this.aux);
     return aux;
   }
 

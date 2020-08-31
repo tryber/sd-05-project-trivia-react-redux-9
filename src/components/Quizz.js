@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import questions from '../mock_data/questions';
 
 class Quizz extends Component {
   render() {
     const { counter, shuffle, gameData } = this.props;
-    const aux = gameData;
+    // const aux = gameData;
     return (
       <div>
         {
@@ -13,11 +14,13 @@ class Quizz extends Component {
         <div>
           <p data-testid="question-category">
             <strong>Category: </strong>
-            {aux.gameData[shuffle[counter]].category}
+            {questions.results[shuffle[counter]]?.category}
+            {/* {aux.gameData[shuffle[counter]].category} */}
           </p>
           <p data-testid="question-text">
             <strong>{`Question 0${counter + 1}: `}</strong>
-            {aux.gameData[shuffle[counter]].question}
+            {questions.results[shuffle[counter]]?.question}
+            {/* {aux.gameData[shuffle[counter]].question} */}
           </p>
         </div>
       )

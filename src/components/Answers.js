@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// import questions from '../mock_data/questions';
+import questions from '../mock_data/questions';
 import {
   setCounter, getAnswer, resetColors, setScore,
 } from '../actions';
@@ -33,8 +33,9 @@ class Answers extends Component {
   updateScore(id) {
     const { score } = this.state;
     const { changeScore, gameData } = this.props;
-    const aux = gameData;
-    const valor = 10 + (difLevels[aux.gameData[id].difficulty] * 20);
+    // const aux = gameData;
+    // const valor = 10 + (difLevels[aux.gameData[id].difficulty] * 20);
+    const valor = 10 + (difLevels[questions.results[id].difficulty] * 20);
     this.setState({
       score: score + valor,
     });
@@ -45,7 +46,7 @@ class Answers extends Component {
     const {
       counter, correctanswer, setCollors, shuffle, gameData,
     } = this.props;
-    const aux = gameData;
+    // const aux = gameData;
     return (
       <span>
         <button
@@ -58,7 +59,8 @@ class Answers extends Component {
             setCollors();
           }}
         >
-          {aux.gameData[shuffle[counter]].correct_answer}
+          {questions.results[shuffle[counter]]?.correct_answer}
+          {/* {aux.gameData[shuffle[counter]].correct_answer} */}
         </button>
       </span>
     );
@@ -68,10 +70,11 @@ class Answers extends Component {
     const {
       counter, wronganswer, setCollors, shuffle, gameData,
     } = this.props;
-    const aux = gameData;
+    // const aux = gameData;
     return (
       <span>
-        {aux.gameData[shuffle[counter]].incorrect_answers.map((wrong) => (
+        {/* {aux.gameData[shuffle[counter]].incorrect_answers.map((wrong) => ( */}
+        {questions.results[shuffle[counter]]?.incorrect_answers.map((wrong) => (
           <button
             type="button"
             className={wronganswer}
@@ -88,7 +91,7 @@ class Answers extends Component {
 
   answerButtons() {
     const aux = [this.correctButton(), this.wrongButtons()];
-    console.log(aux);
+    // console.log(aux);
     for (let i = aux.length - 1; i > 0; i -= 1) {
       const j = Math.floor(Math.random() * (i + 1));
       [aux[i], aux[j]] = [aux[j], aux[i]];
