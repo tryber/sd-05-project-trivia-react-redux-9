@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import '../App.css';
 import questions from '../mock_data/questions';
 import {
   setCounter, getAnswer, resetColors, setScore,
@@ -34,6 +33,9 @@ class Answers extends Component {
   updateScore(id) {
     const { score } = this.state;
     const { changeScore } = this.props;
+    // const { changeScore, gameData } = this.props;
+    // const aux = gameData;
+    // const valor = 10 + (difLevels[aux.gameData[id].difficulty] * 20);
     const valor = 10 + (difLevels[questions.results[id].difficulty] * 20);
     this.setState({
       score: score + valor,
@@ -41,31 +43,63 @@ class Answers extends Component {
     changeScore(valor);
   }
 
-  answerButtons() {
-    const { counter, correctanswer, wronganswer, setCorrectAnswer } = this.props;
+  correctButton() {
+    const {
+      counter, correctanswer, setCollors, shuffle,
+      // gameData,
+    } = this.props;
+    // const aux = gameData;
     return (
-      <div>
+      <span>
         <button
           type="button"
           className={correctanswer}
           data-testid="correct-answer"
-          onClick={() => { this.setVisible(); setCorrectAnswer(); this.updateScore(counter); }}
+          onClick={() => {
+            this.setVisible();
+            this.updateScore(counter);
+            setCollors();
+          }}
         >
-          {questions.results[counter].correct_answer}
+          {questions.results[shuffle[counter]].correct_answer}
+          {/* {aux.gameData[shuffle[counter]].correct_answer} */}
         </button>
-        {questions.results[counter].incorrect_answers.map((wrong, index) => (
+      </span>
+    );
+  }
+
+  wrongButtons() {
+    const {
+      counter, wronganswer, setCollors, shuffle,
+      // gameData,
+    } = this.props;
+    // const aux = gameData;
+    return (
+      <span>
+        {/* {aux.gameData[shuffle[counter]].incorrect_answers.map((wrong) => ( */}
+        {questions.results[shuffle[counter]].incorrect_answers.map((wrong) => (
           <button
             type="button"
             className={wronganswer}
             data-testid={`wrong-answer-${index}`}
             key={wrong}
-            onClick={() => { this.setVisible(); setCorrectAnswer(); }}
+            onClick={() => { this.setVisible(); setCollors(); }}
           >
             {wrong}
           </button>
         ))}
-      </div>
+      </span>
     );
+  }
+
+  answerButtons() {
+    const aux = [this.correctButton(), this.wrongButtons()];
+    // console.log(aux);
+    for (let i = aux.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [aux[i], aux[j]] = [aux[j], aux[i]];
+    }
+    return aux;
   }
 
   render() {
@@ -95,11 +129,13 @@ const mapStateToProps = (state) => ({
   counter: state.requestReducer.counter,
   correctanswer: state.questionsReducer.correct,
   wronganswer: state.questionsReducer.wrong,
+  shuffle: state.questionsReducer.shuffle,
+  // gameData: state.questionsReducer,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   increaseCounter: (counter) => dispatch(setCounter(counter)),
-  setCorrectAnswer: () => dispatch(getAnswer('correct', 'wrong')),
+  setCollors: () => dispatch(getAnswer('correct', 'wrong')),
   resetColorBtn: () => dispatch(resetColors()),
   changeScore: (score) => dispatch(setScore(score)),
 });
@@ -108,10 +144,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(Answers);
 
 Answers.propTypes = {
   increaseCounter: PropTypes.func.isRequired,
-  counter: PropTypes.func.isRequired,
-  correctanswer: PropTypes.func.isRequired,
-  wronganswer: PropTypes.func.isRequired,
-  setCorrectAnswer: PropTypes.func.isRequired,
+  counter: PropTypes.number.isRequired,
+  correctanswer: PropTypes.string.isRequired,
+  wronganswer: PropTypes.string.isRequired,
+  setCollors: PropTypes.func.isRequired,
   resetColorBtn: PropTypes.func.isRequired,
   changeScore: PropTypes.func.isRequired,
+  shuffle: PropTypes.arrayOf(PropTypes.number).isRequired,
+  // gameData: PropTypes.objectOf(PropTypes.object).isRequired,
 };

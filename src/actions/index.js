@@ -8,6 +8,7 @@ export const SET_COUNTER = 'SET_COUNTER';
 export const RESET_COLORS = 'RESET_COLORS';
 export const SET_SCORE = 'SET_SCORE';
 export const RESET_COUNTER = 'RESET_COUNTER';
+export const RDM_INDEX = 'RDM_INDEX';
 
 export const setStatus = (email, name) => ({
   type: SET_LOGIN,
@@ -50,6 +51,12 @@ export const setScore = (score) => ({
   score,
 });
 
+
 export const resetCounter = () => ({
   type: RESET_COUNTER,
+});
+
+export const randomIndex = (shuffle) => ({
+  type: RDM_INDEX,
+  shuffle,
 });
